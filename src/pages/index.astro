@@ -1,76 +1,188 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
+import "../styles/globals.css";
 ---
 
-<Layout title="Welcome to Astro.">
-	<main>
-		<img src="./wdc.jpeg" />
-		<h1></h1>Welcome to <span class="text-gradient">Web Dev Cody</span>
-		<p class="instructions">I'll work on this site one day....</p>
-		<Card
-			href="https://youtube.com/@webdevcody"
-			title="YouTube"
-			body="Checkout my youtube channel for my latest videos and tutorials."
-		/>
-	</main>
+<Layout title="Web Dev Cody">
+  <main>
+    <div class="container">
+      <section class="hero">
+        <div class="cta">
+          <h1>
+            I'm <span class="blue">Cody</span>
+            , I like helping others learn <span class="blue"
+              >web development</span
+            >.
+          </h1>
+
+          <p>
+            Follow me to learn various web development concepts by watching me
+            on <a
+              target="_blank"
+              referrerpolicy="no-referrer"
+              href="https://youtube.com/@webdevcody">YouTube</a
+            > and <a
+              href="https://twitch.tv/webdevcody"
+              target="_blank"
+              referrerpolicy="no-referrer">Twitch</a
+            >.
+          </p>
+
+          <p class="mb-0">Subscribe for tips, lessions, and news</p>
+
+          <form id="subscribe">
+            <input name="name" type="email" placeholder="email address" />
+            <button>SUBSCRIBE</button>
+          </form>
+
+          <div id="message"></div>
+          <div id="error"></div>
+        </div>
+
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/mp1-HUjZE0o"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </section>
+    </div>
+  </main>
 </Layout>
 
 <style>
-	body {
-		background: #2fdeed;
-		height: 100vh;
-		margin: 0;
-	}
+  * {
+    box-sizing: border-box;
+  }
 
-	img {
-		width: 300px;
-	}
+  body {
+    background: var(--primary-dark);
+    height: 100vh;
+    margin: 0;
+    color: white;
+  }
 
-	main {
-		margin: auto;
-		padding: 1.5rem;
-		max-width: 60ch;
-		display: flex;
-		align-items: center;
-		flex-direction: column;
-	}
+  img {
+    width: 300px;
+  }
 
-	h1 {
-		font-size: 3rem;
-		font-weight: 800;
-		margin: 0;
-	}
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
-	.instructions {
-		line-height: 1.6;
-		margin: 1rem 0;
-		border: 1px solid rgba(var(--accent), 25%);
-		background-color: white;
-		padding: 1rem;
-		border-radius: 0.4rem;
-	}
-	.instructions code {
-		font-size: 0.875em;
-		font-weight: bold;
-		background: rgba(var(--accent), 12%);
-		color: rgb(var(--accent));
-		border-radius: 4px;
-		padding: 0.3em 0.45em;
-	}
-	.instructions strong {
-		color: rgb(var(--accent));
-	}
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 1rem;
-		padding: 0;
-	}
+  main {
+    display: flex;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  h1 span {
+    font-weight: 600;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    padding: 100px 60px;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+    line-height: 36px;
+  }
+
+  .hero p {
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 300;
+  }
+
+  .blue {
+    color: var(--primary);
+  }
+
+  .red {
+    color: var(--red);
+  }
+
+  .cta {
+    width: 100%;
+  }
+
+  #error {
+    color: var(--red);
+  }
+
+  form {
+    display: flex;
+  }
+
+  form input {
+    padding: 14px;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  form button {
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 300;
+    background-color: var(--primary);
+    color: black;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    cursor: pointer;
+    border: none;
+  }
+
+  form button:hover {
+    background-color: var(--primary-darker);
+  }
+
+  iframe {
+    width: 100%;
+  }
+
+  .mb-0 {
+    margin-bottom: 0;
+  }
 </style>
+
+<script>
+  document.getElementById("subscribe")!.addEventListener("submit", (e: any) => {
+    e.preventDefault();
+    const messageDiv = document.getElementById("message")!;
+    const errorDiv = document.getElementById("error")!;
+    messageDiv.innerText = "";
+    errorDiv.innerText = "";
+    const form = new FormData(e.target);
+    const email = form.get("email");
+    fetch("https://newsletter-api.webdevcody.com/subscribe", {
+      method: "POST",
+      body: JSON.stringify({
+        email,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          messageDiv.innerText = "Thank you for subscribing!";
+        } else {
+          errorDiv.innerText = "An error occured while subscribing";
+        }
+      })
+      .catch(() => {
+        errorDiv.innerText = "An error occured while subscribing";
+      });
+  });
+</script>

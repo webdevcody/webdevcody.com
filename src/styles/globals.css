@@ -1,0 +1,22 @@
+:root {
+  --primary-darker: #27bdca;
+  --primary: #2fdeed;
+  --primary-dark: #2e3047;
+  --primary-medium: #3c3f5b;
+  --bg-dark: #334150;
+  --red: #fe5660;
+}
+
+.container {
+  max-width: 1024px;
+  margin: auto;
+  flex-grow: 1;
+}
+
+a {
+  color: var(--primary);
+}
+
+button {
+  font-family: ;
+}
