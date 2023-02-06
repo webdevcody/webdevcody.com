@@ -31,7 +31,12 @@ import "../styles/globals.css";
           <p class="mb-0">Subscribe for tips, lessions, and news</p>
 
           <form id="subscribe">
-            <input name="name" type="email" placeholder="email address" />
+            <input
+              id="name"
+              name="name"
+              type="email"
+              placeholder="email address"
+            />
             <button>SUBSCRIBE</button>
           </form>
 
@@ -154,6 +159,12 @@ import "../styles/globals.css";
   .mb-0 {
     margin-bottom: 0;
   }
+
+  #message {
+    color: var(--primary);
+    margin-top: 6px;
+    font-size: 18px;
+  }
 </style>
 
 <script>
@@ -161,11 +172,11 @@ import "../styles/globals.css";
     e.preventDefault();
     const messageDiv = document.getElementById("message")!;
     const errorDiv = document.getElementById("error")!;
+    const nameInput = document.getElementById("name")! as HTMLInputElement;
     messageDiv.innerText = "";
     errorDiv.innerText = "";
-    const form = new FormData(e.target);
-    const email = form.get("email");
-    fetch("https://newsletter-api.webdevcody.com/subscribe", {
+    const email = nameInput.value;
+    fetch("https://newsletter-api.webdevcody.com/subscriptions", {
       method: "POST",
       body: JSON.stringify({
         email,
@@ -177,6 +188,7 @@ import "../styles/globals.css";
       .then((response) => {
         if (response.ok) {
           messageDiv.innerText = "Thank you for subscribing!";
+          nameInput.value = "";
         } else {
           errorDiv.innerText = "An error occured while subscribing";
         }
