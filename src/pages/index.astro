@@ -37,7 +37,12 @@ import "../styles/globals.css";
               type="email"
               placeholder="email address"
             />
-            <button>SUBSCRIBE</button>
+            <button
+              class="g-recaptcha"
+              data-sitekey={import.meta.env.PUBLIC_RECAPTCH_KEY}
+              data-callback="onSubmit"
+              data-action="submit">SUBSCRIBE</button
+            >
           </form>
 
           <div id="message"></div>
@@ -64,7 +69,7 @@ import "../styles/globals.css";
 
   body {
     background: var(--primary-dark);
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
     color: white;
   }
@@ -167,12 +172,13 @@ import "../styles/globals.css";
   }
 </style>
 
-<script>
-  document.getElementById("subscribe")!.addEventListener("submit", (e: any) => {
-    e.preventDefault();
-    const messageDiv = document.getElementById("message")!;
-    const errorDiv = document.getElementById("error")!;
-    const nameInput = document.getElementById("name")! as HTMLInputElement;
+<script is:inline src="https://www.google.com/recaptcha/api.js"></script>
+
+<script is:inline lang="ts">
+  window.onSubmit = function (token) {
+    const messageDiv = document.getElementById("message");
+    const errorDiv = document.getElementById("error");
+    const nameInput = document.getElementById("name");
     messageDiv.innerText = "";
     errorDiv.innerText = "";
     const email = nameInput.value;
@@ -180,6 +186,7 @@ import "../styles/globals.css";
       method: "POST",
       body: JSON.stringify({
         email,
+        token,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -196,5 +203,5 @@ import "../styles/globals.css";
       .catch(() => {
         errorDiv.innerText = "An error occured while subscribing";
       });
-  });
+  };
 </script>
