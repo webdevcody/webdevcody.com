@@ -25,16 +25,18 @@ export async function OPTIONS(): Promise<NextResponse> {
 }
 
 function saveSubscription(email: string, unsubscribeId: string) {
-  return dynamoClient.put({
-    TableName: TABLE_NAME,
-    Item: {
-      pk: `email|${email}`,
-      sk: `email|${email}`,
-      email,
-      unsubscribeId,
-      createdAt: new Date().toISOString(),
-    },
-  });
+  return dynamoClient
+    .put({
+      TableName: TABLE_NAME,
+      Item: {
+        pk: `email|${email}`,
+        sk: `email|${email}`,
+        email,
+        unsubscribeId,
+        createdAt: new Date().toISOString(),
+      },
+    })
+    .promise();
 }
 
 function getSubscriptionByEmail(email: string) {
@@ -51,8 +53,6 @@ function getSubscriptionByEmail(email: string) {
 }
 
 async function verifyRecaptcha(token: string, secret: string) {
-  if (process.env.DISABLE_RECAPTCHA) return;
-
   const response = await fetch(
     "https://www.google.com/recaptcha/api/siteverify",
     {
@@ -83,6 +83,8 @@ export async function POST(req: Request): Promise<NextResponse> {
 
     const subscription = await getSubscriptionByEmail(email);
 
+    console.log("got subscription of", subscription);
+
     if (subscription) {
       return NextResponse.json(
         { message: "created" },
@@ -93,6 +95,8 @@ export async function POST(req: Request): Promise<NextResponse> {
     const unsubscribeId = uuidv4();
 
     await saveSubscription(email, unsubscribeId);
+
+    console.log("saving subscription");
 
     return NextResponse.json(
       { message: "created" },
