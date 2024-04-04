@@ -24,7 +24,7 @@ export default function Home() {
           const email = formData.get("email");
           console.log({ email });
 
-          fetch("https://newsletter-api.webdevcody.com/subscriptions", {
+          fetch("/api/subscriptions", {
             method: "POST",
             body: JSON.stringify({
               email,
