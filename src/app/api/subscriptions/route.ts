@@ -14,16 +14,6 @@ const dynamoClient = new DynamoDB.DocumentClient({
   region: "us-east-1",
 });
 
-export async function OPTIONS(): Promise<NextResponse> {
-  return new NextResponse(null, {
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST",
-      "Access-Control-Allow-Headers": "Content-Type",
-    },
-  });
-}
-
 function saveSubscription(email: string, unsubscribeId: string) {
   return dynamoClient
     .put({
@@ -83,25 +73,15 @@ export async function POST(req: Request): Promise<NextResponse> {
 
     const subscription = await getSubscriptionByEmail(email);
 
-    console.log("got subscription of", subscription);
-
     if (subscription) {
-      return NextResponse.json(
-        { message: "created" },
-        { status: 201, headers: { "Access-Control-Allow-Origin": "*" } }
-      );
+      return NextResponse.json({ message: "created" }, { status: 201 });
     }
 
     const unsubscribeId = uuidv4();
 
     await saveSubscription(email, unsubscribeId);
 
-    console.log("saving subscription");
-
-    return NextResponse.json(
-      { message: "created" },
-      { status: 201, headers: { "Access-Control-Allow-Origin": "*" } }
-    );
+    return NextResponse.json({ message: "created" }, { status: 201 });
   } catch (error) {
     return new NextResponse("Internal Server Error", { status: 500 });
   }
