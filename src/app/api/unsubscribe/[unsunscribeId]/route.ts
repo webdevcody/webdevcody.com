@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { NextResponse } from "next/server";
 import { DynamoDB } from "aws-sdk";
-import { TSubscription } from "../route";
+import { TSubscription } from "../../subscriptions/route";
 
 const TABLE_NAME = process.env.TABLE_NAME!;
 
