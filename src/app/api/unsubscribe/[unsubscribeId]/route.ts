@@ -54,10 +54,10 @@ export async function GET(
     }
 
     await deleteSubscription(subscription.email);
-
-    redirect("/bye");
   } catch (error) {
     console.error(error);
     return new NextResponse("Internal Server Error", { status: 500 });
   }
+
+  redirect("/bye");
 }
