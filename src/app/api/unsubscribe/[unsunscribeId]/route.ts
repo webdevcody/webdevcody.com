@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { NextResponse } from "next/server";
 import { DynamoDB } from "aws-sdk";
 import { TSubscription } from "../../subscriptions/route";
+import { redirect } from "next/navigation";
 
 const TABLE_NAME = process.env.TABLE_NAME!;
 
@@ -54,8 +55,9 @@ export async function GET(
 
     await deleteSubscription(subscription.email);
 
-    return NextResponse.json({ message: "deleted" }, { status: 200 });
+    redirect("/bye");
   } catch (error) {
+    console.error(error);
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
