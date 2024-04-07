@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
-      <div className="grid grid-cols-2 gap-12">
+      <div className="grid grid-col-1 md:grid-cols-2 gap-12">
         <div className="flex flex-col gap-4">
           <h1 className="text-4xl">Happy Coding!</h1>
           <p className="text-2xl">
@@ -77,8 +77,7 @@ export default function Home() {
 
         <div>
           <iframe
-            width="560"
-            height="315"
+            className="w-full h-[300px]"
             src="https://www.youtube.com/embed/-lNpF0ACe1Y?si=nUyS2-DCZCw2qj1Z"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
