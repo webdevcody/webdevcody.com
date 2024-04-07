@@ -1,5 +1,6 @@
 "use client";
 
+import { sendEvent } from "@/lib/analytics";
 import { useMutation } from "@tanstack/react-query";
 import { useReCaptcha } from "next-recaptcha-v3";
 
@@ -49,6 +50,7 @@ export default function Home() {
                   token,
                 })
                 .then(() => {
+                  sendEvent("user subscribed");
                   form.reset();
                 });
             }}
