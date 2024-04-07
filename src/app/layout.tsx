@@ -11,6 +11,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "WebDevCody.com",
   description: "My personal website for my youtube channel",
+  icons: [
+    { rel: "icon", type: "image/png", sizes: "16x16", url: "/favicon.ico" },
+  ],
 };
 
 export default function RootLayout({
