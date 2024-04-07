@@ -67,7 +67,7 @@ export default function Home() {
             </div>
             <button
               disabled={subscribeMutation.isPending}
-              className="bg-cyan-400 rounded p-2 text-black h-fit self-end"
+              className="cursor-pointer bg-cyan-400 rounded p-2 text-black h-fit self-end"
             >
               {subscribeMutation.isPending ? "Subscribing..." : "Subscribe"}
             </button>
