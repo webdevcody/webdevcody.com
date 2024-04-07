@@ -66,8 +66,9 @@ export default function Home() {
               />
             </div>
             <button
+              type="submit"
               disabled={subscribeMutation.isPending}
-              className="disabled:bg-gray-500 disabled:cursor-default cursor-pointer bg-cyan-400 rounded p-2 text-black h-fit self-end"
+              className="disabled:bg-gray-500 bg-cyan-400 rounded p-2 text-black h-fit self-end"
             >
               {subscribeMutation.isPending ? "Subscribing..." : "Subscribe"}
             </button>
