@@ -4,6 +4,7 @@ import "./globals.css";
 import Image from "next/image";
 import Link from "next/link";
 import { Providers } from "./providers";
+import { SendEventOnLoad } from "./send-event-on-load";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
+          <SendEventOnLoad eventKey={"page load"} />
           <header className="bg-gray-900">
             <div className="container mx-auto flex justify-between py-2">
               <Link href="/" className="flex items-center gap-4">
