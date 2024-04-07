@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { NextResponse } from "next/server";
 import { DynamoDB } from "aws-sdk";
+import { env } from "@/env";
 
 export type TSubscription = {
   pk: string;
@@ -8,7 +9,7 @@ export type TSubscription = {
   unsubscribeId: string;
   email: string;
 };
-const TABLE_NAME = process.env.TABLE_NAME!;
+const TABLE_NAME = env.TABLE_NAME;
 
 const dynamoClient = new DynamoDB.DocumentClient({
   region: "us-east-1",
@@ -64,7 +65,7 @@ export async function POST(req: Request): Promise<NextResponse> {
     const { token, email } = body;
 
     try {
-      await verifyRecaptcha(token, process.env.RECAPTCHA_SECRET!);
+      await verifyRecaptcha(token, env.RECAPTCHA_SECRET);
     } catch (err) {
       return new NextResponse("recaptcha token failed to validate", {
         status: 400,

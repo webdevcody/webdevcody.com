@@ -1,10 +1,10 @@
-import { v4 as uuidv4 } from "uuid";
 import { NextResponse } from "next/server";
 import { DynamoDB } from "aws-sdk";
 import { TSubscription } from "../../subscriptions/route";
 import { redirect } from "next/navigation";
+import { env } from "@/env";
 
-const TABLE_NAME = process.env.TABLE_NAME!;
+const TABLE_NAME = env.TABLE_NAME;
 
 const dynamoClient = new DynamoDB.DocumentClient({
   region: "us-east-1",
