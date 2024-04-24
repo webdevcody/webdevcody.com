@@ -10,8 +10,9 @@ export default function NewsletterSection() {
               Subscribe to my newsletter.
             </h2>
             <p className="mt-4 text-lg leading-8 text-gray-300">
-              Nostrud amet eu ullamco nisi aute in ad minim nostrud adipisicing
-              velit quis. Duis tempor incididunt dolore.
+              If you are interested in getting updates when I publish new
+              courses or wanting useful coding tips and tricks, be sure to
+              subscribe to my newsletter below!
             </p>
             <div className="mt-6 flex max-w-md gap-x-4">
               <label htmlFor="email-address" className="sr-only">
