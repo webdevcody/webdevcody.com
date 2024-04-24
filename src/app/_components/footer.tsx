@@ -38,6 +38,28 @@ export function Footer() {
                 <h3 className="text-gray-700 uppercase dark:text-white">
                   About
                 </h3>
+
+                <Link
+                  href="/terms-of-service"
+                  className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
+                >
+                  Terms of Service
+                </Link>
+
+                <Link
+                  href="/privacy-policy"
+                  className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
+                >
+                  Privacy Policy
+                </Link>
+
+                <Link
+                  href="/fulfillment-policy"
+                  className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
+                >
+                  Fulfillment Policy
+                </Link>
+
                 <Link
                   href="/contact"
                   className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"

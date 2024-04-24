@@ -13,6 +13,7 @@
     "@tanstack/react-query": "^5.28.14",
     "aws-sdk": "^2.1593.0",
     "next": "^14.1.4",
+    "next-mdx-remote": "^4.4.1",
     "next-recaptcha-v3": "^1.3.0",
     "react": "^18",
     "react-dom": "^18",
@@ -21,6 +22,7 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.12",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
