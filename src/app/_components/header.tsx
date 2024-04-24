@@ -18,6 +18,9 @@ export default function Header() {
         </Link>
 
         <div className="flex gap-8 items-center">
+          <Link href="/courses" className="hover:underline">
+            Courses
+          </Link>
           <Link href="/contact" className="hover:underline">
             Contact
           </Link>
