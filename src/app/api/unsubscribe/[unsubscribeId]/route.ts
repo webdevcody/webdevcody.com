@@ -1,63 +1,15 @@
 import { NextResponse } from "next/server";
-import { DynamoDB } from "aws-sdk";
-import { TSubscription } from "../../subscriptions/route";
 import { redirect } from "next/navigation";
-import { env } from "@/env";
-
-const TABLE_NAME = env.TABLE_NAME;
-
-const dynamoClient = new DynamoDB.DocumentClient({
-  region: "us-east-1",
-});
-
-function getSubscriptionByUnsubscribeId(unsubscribeId: string) {
-  return dynamoClient
-    .query({
-      TableName: TABLE_NAME,
-      IndexName: "gsi1",
-      KeyConditionExpression: "#unsubscribeId = :pk",
-      ExpressionAttributeValues: {
-        ":pk": unsubscribeId,
-      },
-      ExpressionAttributeNames: {
-        "#unsubscribeId": "unsubscribeId",
-      },
-      Limit: 1,
-    })
-    .promise()
-    .then((results) => results.Items?.[0] as TSubscription | null);
-}
-
-function deleteSubscription(email: string) {
-  return dynamoClient
-    .delete({
-      TableName: TABLE_NAME,
-      Key: {
-        pk: `email|${email}`,
-        sk: `email|${email}`,
-      },
-    })
-    .promise();
-}
+import { unsubscribeUserCase } from "@/use-cases/subscriptions";
+import { unstable_noStore } from "next/cache";
 
 export async function GET(
   req: Request,
   { params }: { params: { unsubscribeId: string } }
 ): Promise<NextResponse> {
-  try {
-    const unsubscribeId = params.unsubscribeId;
+  unstable_noStore();
 
-    const subscription = await getSubscriptionByUnsubscribeId(unsubscribeId);
-
-    if (!subscription) {
-      return new NextResponse("Not Found", { status: 404 });
-    }
-
-    await deleteSubscription(subscription.email);
-  } catch (error) {
-    console.error(error);
-    return new NextResponse("Internal Server Error", { status: 500 });
-  }
+  await unsubscribeUserCase(params.unsubscribeId);
 
   redirect("/bye");
 }
