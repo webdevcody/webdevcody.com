@@ -1,6 +1,6 @@
 "use client";
 
-import { SubscribeForm } from "./(landing)/_compoents/subscribe-form";
+import { SubscribeForm } from "./_compoents/subscribe-form";
 
 export default function Home() {
   return (
