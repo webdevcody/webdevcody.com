@@ -1,7 +1,7 @@
 "use client";
 
+import { SendEventOnLoad } from "@/components/send-event-on-load";
 import Link from "next/link";
-import { SendEventOnLoad } from "../send-event-on-load";
 
 export default function ByePage() {
   return (
