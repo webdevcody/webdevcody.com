@@ -5,8 +5,14 @@ import { Providers } from "./providers";
 import Header from "./_components/header";
 import { Footer } from "./_components/footer";
 import { SendEventOnLoad } from "@/components/send-event-on-load";
+import { Inter as FontSans } from "next/font/google";
+import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toaster";
 
-const inter = Inter({ subsets: ["latin"] });
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   title: "WebDevCody.com",
@@ -22,14 +28,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable
+        )}
+      >
         <Providers>
           <SendEventOnLoad eventKey={"page load"} />
           <Header />
           {children}
           <Footer />
         </Providers>
+        <Toaster />
       </body>
     </html>
   );
