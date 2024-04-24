@@ -6,13 +6,16 @@ export default function Header() {
   return (
     <header className="bg-gray-900">
       <div className="container mx-auto flex justify-between py-2">
-        <Link href="/" className="flex items-center gap-4">
+        <Link
+          href="/"
+          className="flex items-center gap-4 hover:underline hover:text-blue-200"
+        >
           <Image
             src="/wdc.jpeg"
-            width="50"
-            height="50"
+            width="40"
+            height="40"
             alt="web dev cody logo"
-            className="rounded-full"
+            className="rounded"
           />
           WebDevCody.com
         </Link>

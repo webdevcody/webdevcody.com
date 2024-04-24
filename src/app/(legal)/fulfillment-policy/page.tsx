@@ -13,7 +13,7 @@ export default function FulfillmentPolicyPage() {
   }
 
   return (
-    <div className="container mx-auto max-w-4xl py-12">
+    <div className="container mx-auto max-w-4xl py-12 min-h-screen">
       <article className="prose dark:prose-invert max-w-2xl pb-10 w-full">
         <CustomMDX source={post.content} />
       </article>
