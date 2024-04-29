@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["public-files.gumroad.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "public-files.gumroad.com",
+      },
+    ],
   },
 };
 

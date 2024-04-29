@@ -1,4 +1,7 @@
+import { SubscribeForm } from "@/app/(landing)/_compoents/subscribe-form";
+import { env } from "@/env";
 import { CalendarIcon, HandIcon } from "lucide-react";
+import { ReCaptchaProvider } from "next-recaptcha-v3";
 import Image from "next/image";
 
 export default function NewsletterSection() {
@@ -22,26 +25,11 @@ export default function NewsletterSection() {
               courses or wanting useful coding tips and tricks, be sure to
               subscribe to my newsletter below!
             </p>
-            <div className="mt-6 flex max-w-md gap-x-4">
-              <label htmlFor="email-address" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="email-address"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className="min-w-0 flex-auto rounded-md border-0 bg-white px-3.5 py-2 text-black shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-cyan-500 sm:text-sm sm:leading-6"
-                placeholder="Enter your email"
-              />
-              <button
-                type="submit"
-                className="flex-none rounded-md bg-white border-red-400 border px-3.5 py-2.5 text-sm font-semibold hover:text-white text-red-400 shadow-sm hover:bg-red-400 "
-              >
-                Subscribe
-              </button>
-            </div>
+            <ReCaptchaProvider
+              reCaptchaKey={env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+            >
+              <SubscribeForm />
+            </ReCaptchaProvider>
           </div>
           <dl className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:pt-2">
             <div className="flex flex-col items-start">
