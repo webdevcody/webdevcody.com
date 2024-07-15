@@ -1,8 +1,7 @@
-FROM node:20-alpine AS base
+FROM node:20-slim AS base
 
 FROM base AS builder
 
-RUN apk update && apk add --no-cache libc6-compat bind-tools
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
@@ -43,6 +42,5 @@ EXPOSE 3000
 ENV PORT=3000
 
 ARG HOSTNAME
-ENV HOSTNAME=$HOSTNAME
 
 CMD node server.js
