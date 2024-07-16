@@ -4,9 +4,9 @@ export function AboutSection() {
       <h1 className="text-center text-4xl font-bold mb-8">About Me 👋</h1>
 
       <p className="text-lg leading-8 mb-8">
-        I&apos;m Cody and I&apos; been working as web develop in this industry
+        I&apos;m Cody and I&apos;ve been working as a web developer in this industry
         for over <strong>10 years</strong>. When I get time, I publish tutorial
-        videos on my youtube channel to help teach others about web development
+        videos on my YouTube channel to help teach others about web development
         how to code, but I will say my heart is in entrepreneurship; I&apos;m
         often thinking of new application ideas I could build and turn into a
         successful SaaS business.
