@@ -5,6 +5,8 @@ export const env = createEnv({
   server: {
     TABLE_NAME: z.string().min(1),
     RECAPTCHA_SECRET: z.string().min(1),
+    MAILING_LIST_ENDPOINT: z.string().min(1),
+    MAILING_LIST_PASSWORD: z.string().min(1),
   },
   client: {
     NEXT_PUBLIC_RECAPTCHA_SITE_KEY: z.string().min(1),
@@ -12,6 +14,8 @@ export const env = createEnv({
     NEXT_PUBLIC_IS_LOCAL: z.string().optional(),
   },
   runtimeEnv: {
+    MAILING_LIST_PASSWORD: process.env.MAILING_LIST_PASSWORD,
+    MAILING_LIST_ENDPOINT: process.env.MAILING_LIST_ENDPOINT,
     RECAPTCHA_SECRET: process.env.RECAPTCHA_SECRET,
     TABLE_NAME: process.env.TABLE_NAME,
     NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,

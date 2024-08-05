@@ -1,12 +1,9 @@
 import { verifyRecaptcha } from "@/services/captcha";
 import {
   deleteSubscription,
-  getSubscriptionByEmail,
   getSubscriptionByUnsubscribeId,
-  saveSubscription,
 } from "@/data-access/subscriptions";
 import { env } from "@/env";
-import { v4 as uuidv4 } from "uuid";
 
 export async function subscribeUserCase({
   token,
@@ -17,15 +14,16 @@ export async function subscribeUserCase({
 }) {
   await verifyRecaptcha(token, env.RECAPTCHA_SECRET);
 
-  const subscription = await getSubscriptionByEmail(email);
-
-  if (subscription) {
-    return;
-  }
-
-  const unsubscribeId = uuidv4();
-
-  await saveSubscription(email, unsubscribeId);
+  const params = new URLSearchParams();
+  params.append("email", email);
+  await fetch(env.MAILING_LIST_ENDPOINT, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.MAILING_LIST_PASSWORD}`,
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: params.toString(),
+  });
 }
 
 export async function unsubscribeUserCase(unsubscribeId: string) {
