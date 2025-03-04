@@ -50,6 +50,14 @@ export function Footer() {
               <div>
                 <h3 className="text-gray-700 uppercase">Products</h3>
                 <a
+                  href="https://projectplannerai.com/"
+                  target="_blank"
+                  referrerPolicy="no-referrer"
+                  className="block mt-2 text-sm text-gray-600 hover:underline"
+                >
+                  Project Planner AI
+                </a>
+                <a
                   href="https://icongeneratorai.com/"
                   target="_blank"
                   referrerPolicy="no-referrer"

@@ -7,6 +7,13 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const navigation = [
+    { name: "Home", href: "/" },
+    { name: "Courses", href: "/courses" },
+    { name: "My Products", href: "/products" },
+    { name: "Contact", href: "/contact" },
+  ];
+
   return (
     <div className="block lg:hidden">
       {/* Hamburger Button */}
@@ -15,7 +22,7 @@ export default function MobileMenu() {
         className="relative z-50 p-2"
         aria-label="Toggle Menu"
       >
-        <div className="w-6 h-5 flex flex-col justify-between">
+        <div className="w-5 h-4 flex flex-col justify-between">
           <span
             className={`w-full h-0.5 bg-black transform transition-all duration-300 ${
               isOpen ? "rotate-45 translate-y-2" : ""
@@ -54,27 +61,16 @@ export default function MobileMenu() {
               </button>
 
               <div className="py-8 flex flex-col items-center w-full space-y-8 bg-yellow-100">
-                <Link
-                  href="/"
-                  onClick={() => setIsOpen(false)}
-                  className="hover:underline text-sm"
-                >
-                  HOME
-                </Link>
-                <Link
-                  href="/courses"
-                  onClick={() => setIsOpen(false)}
-                  className="hover:underline text-sm"
-                >
-                  COURSES
-                </Link>
-                <Link
-                  href="/contact"
-                  onClick={() => setIsOpen(false)}
-                  className="hover:underline text-sm"
-                >
-                  CONTACT
-                </Link>
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className="hover:underline text-sm"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
               </div>
             </div>
           </motion.div>

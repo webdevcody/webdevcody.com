@@ -27,15 +27,21 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-8">
+          <Link href="/" className="hover:underline text-sm">
+            HOME
+          </Link>
           <Link href="/courses" className="hover:underline text-sm">
             COURSES
+          </Link>
+          <Link href="/products" className="hover:underline text-sm">
+            MY PRODUCTS
           </Link>
           <Link href="/contact" className="hover:underline text-sm">
             CONTACT
           </Link>
         </nav>
 
-        <div className="flex gap-8 items-center">
+        <div className="flex gap-4 items-center justify-center">
           <FeedbackButton
             triggerContent={
               <button title="Leave Suggestion">
