@@ -61,6 +61,20 @@ export function Footer() {
 
               <div>
                 <h3 className="text-gray-700 uppercase">Courses</h3>
+                <Link
+                  href="/courses"
+                  className="block mt-2 text-sm text-gray-600 hover:underline"
+                >
+                  Courses
+                </Link>
+                <a
+                  href="https://webdevcody.gumroad.com/l/beginner-react-challenges-collection"
+                  target="_blank"
+                  referrerPolicy="no-referrer"
+                  className="block mt-2 text-sm text-gray-600 hover:underline"
+                >
+                  React Challenges
+                </a>
                 <a
                   href="https://webdevcody.gumroad.com/l/jipjfm"
                   target="_blank"
@@ -85,7 +99,7 @@ export function Footer() {
 
         <div>
           <p className="text-center text-gray-500">
-            © Seibert Software Solutions, LLC 2024 - All rights reserved
+            © Seibert Software Solutions, LLC 2025 - All rights reserved
           </p>
         </div>
       </div>

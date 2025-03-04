@@ -80,3 +80,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Add these styles to handle mobile menu */
+@media (max-width: 1024px) {
+  body.menu-open {
+    overflow: hidden;
+  }
+}

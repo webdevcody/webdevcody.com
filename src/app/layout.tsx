@@ -7,6 +7,8 @@ import { SendEventOnLoad } from "@/components/send-event-on-load";
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
+import MobileMenu from "./_components/mobile-menu";
+import Link from "next/link";
 
 const fontSans = FontSans({
   subsets: ["latin"],

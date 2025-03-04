@@ -17,7 +17,7 @@ export function AboutSection() {
         or software processes:
       </p>
 
-      <ul className="grid grid-cols-3 text-center leading-10 font-bold">
+      <ul className="grid grid-cols-1 md:grid-cols-3 text-center leading-10 font-bold">
         <li>🚀 React</li>
         <li>🔥 Next.js</li>
         <li>🛠️ IaC Tooling</li>

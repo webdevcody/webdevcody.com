@@ -12,7 +12,7 @@ export function SubscribeForm() {
   return (
     <>
       <form
-        className="flex gap-2 mt-8"
+        className="flex flex-col sm:flex-row gap-2 mt-8"
         onSubmit={async (e) => {
           e.preventDefault();
           const form = e.target as HTMLFormElement;
@@ -51,7 +51,7 @@ export function SubscribeForm() {
         <button
           type="submit"
           disabled={isPending}
-          className="flex-none rounded-md bg-white border-red-400 border px-3.5 py-2.5 text-sm font-semibold hover:text-white text-red-400 shadow-sm hover:bg-red-400 disabled:text-gray-500 disabled:bg-gray-200 disabled:border-gray-400 disabled:pointer-events-none"
+          className="rounded-md bg-white border-red-400 border px-3.5 py-2.5 text-sm font-semibold hover:text-white text-red-400 shadow-sm hover:bg-red-400 disabled:text-gray-500 disabled:bg-gray-200 disabled:border-gray-400 disabled:pointer-events-none"
         >
           {isPending ? "Subscribing..." : "Subscribe"}
         </button>

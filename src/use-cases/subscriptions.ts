@@ -1,8 +1,4 @@
 import { verifyRecaptcha } from "@/services/captcha";
-import {
-  deleteSubscription,
-  getSubscriptionByUnsubscribeId,
-} from "@/data-access/subscriptions";
 import { env } from "@/env";
 
 export async function subscribeUserCase({
@@ -24,14 +20,4 @@ export async function subscribeUserCase({
     },
     body: params.toString(),
   });
-}
-
-export async function unsubscribeUserCase(unsubscribeId: string) {
-  const subscription = await getSubscriptionByUnsubscribeId(unsubscribeId);
-
-  if (!subscription) {
-    throw new Error("Subscription not found");
-  }
-
-  await deleteSubscription(subscription.email);
 }
