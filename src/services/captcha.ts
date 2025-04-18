@@ -7,8 +7,18 @@ export async function verifyRecaptcha(token: string, secret: string) {
       body: `secret=${secret}&response=${token}`,
     }
   );
-  const json = (await response.json()) as { success: boolean };
+  const json = (await response.json()) as {
+    success: boolean;
+    score: number;
+    action: string;
+  };
+
   if (!json.success) {
     throw new Error("invalid recaptcha token");
+  }
+
+  // Check if the score is above 0.5 (you can adjust this threshold based on your needs)
+  if (json.score < 0.5) {
+    throw new Error("recaptcha score too low");
   }
 }

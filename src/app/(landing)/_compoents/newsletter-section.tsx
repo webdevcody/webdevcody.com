@@ -28,6 +28,20 @@ export default function NewsletterSection() {
             <ReCaptchaProvider
               reCaptchaKey={env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
             >
+              <style jsx global>{`
+                .grecaptcha-badge {
+                  visibility: hidden;
+                }
+                .grecaptcha-badge::after {
+                  content: "This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.";
+                  visibility: visible;
+                  display: block;
+                  font-size: 12px;
+                  color: #666;
+                  margin-top: 8px;
+                }
+              `}</style>
+              <div id="recaptcha-container" className="mt-2"></div>
               <SubscribeForm />
             </ReCaptchaProvider>
           </div>
