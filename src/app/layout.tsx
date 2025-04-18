@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 import MobileMenu from "./_components/mobile-menu";
 import Link from "next/link";
+import Script from "next/script";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -30,6 +31,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <Script
+        id="sensei-script"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.sensei = {
+              siteId: 'kn7369r042qebeaxcm4d24fxg57e83b1'
+            }
+          `,
+        }}
+      />
+      <Script src="https://thesitesherpa.com/widget.js"></Script>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
