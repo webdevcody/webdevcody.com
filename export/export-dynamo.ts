@@ -15,7 +15,7 @@ async function scanTable() {
 }
 
 scanTable().then((data) => {
-  for (let item of data.Items) {
+  for (let item of data.Items || []) {
     console.log(item.email);
   }
 });
