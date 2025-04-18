@@ -35,7 +35,7 @@ export default function RootLayout({
         id="sensei-script"
         dangerouslySetInnerHTML={{
           __html: `
-            window.sensei = {
+            window.sherpa = {
               siteId: 'kn7369r042qebeaxcm4d24fxg57e83b1'
             }
           `,
