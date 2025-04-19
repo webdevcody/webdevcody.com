@@ -24,17 +24,17 @@ export default function MobileMenu() {
       >
         <div className="w-5 h-4 flex flex-col justify-between">
           <span
-            className={`w-full h-0.5 bg-black transform transition-all duration-300 ${
+            className={`w-full h-0.5 bg-foreground transform transition-all duration-300 ${
               isOpen ? "rotate-45 translate-y-2" : ""
             }`}
           />
           <span
-            className={`w-full h-0.5 bg-black transition-all duration-300 ${
+            className={`w-full h-0.5 bg-foreground transition-all duration-300 ${
               isOpen ? "opacity-0" : ""
             }`}
           />
           <span
-            className={`w-full h-0.5 bg-black transform transition-all duration-300 ${
+            className={`w-full h-0.5 bg-foreground transform transition-all duration-300 ${
               isOpen ? "-rotate-45 -translate-y-2" : ""
             }`}
           />
@@ -49,24 +49,24 @@ export default function MobileMenu() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.3 }}
-            className="fixed top-0 left-0 right-0 bottom-0 z-50 bg-yellow-100"
+            className="fixed top-0 left-0 right-0 bottom-0 z-50 bg-background"
           >
             <div className="relative w-full h-full flex flex-col items-center">
               <button
                 onClick={() => setIsOpen(false)}
-                className="absolute top-2 right-8 p-2"
+                className="absolute top-2 right-8 p-2 text-foreground"
                 aria-label="Close Menu"
               >
                 <span className="text-2xl font-bold">×</span>
               </button>
 
-              <div className="py-8 flex flex-col items-center w-full space-y-8 bg-yellow-100">
+              <div className="py-8 flex flex-col items-center w-full space-y-8">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className="hover:underline text-sm"
+                    className="text-foreground hover:text-red-400 transition-colors duration-200 text-sm"
                   >
                     {item.name}
                   </Link>

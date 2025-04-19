@@ -13,25 +13,42 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export function ModeToggle() {
-  const { setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all" />
+        <Button
+          variant="ghost"
+          size="icon"
+          className="relative h-8 w-8 hover:bg-white/5"
+        >
+          <Sun
+            className={`h-[1.1rem] w-[1.1rem] rotate-0 scale-100 text-muted-foreground transition-all dark:-rotate-90 dark:scale-0`}
+          />
+          <Moon
+            className={`absolute h-[1.1rem] w-[1.1rem] rotate-90 scale-0 text-muted-foreground transition-all dark:rotate-0 dark:scale-100`}
+          />
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+      <DropdownMenuContent align="end" className="bg-white/10 backdrop-blur-xl">
+        <DropdownMenuItem
+          onClick={() => setTheme("light")}
+          className="hover:bg-white/10"
+        >
           Light
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem
+          onClick={() => setTheme("dark")}
+          className="hover:bg-white/10"
+        >
           Dark
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
+        <DropdownMenuItem
+          onClick={() => setTheme("system")}
+          className="hover:bg-white/10"
+        >
           System
         </DropdownMenuItem>
       </DropdownMenuContent>

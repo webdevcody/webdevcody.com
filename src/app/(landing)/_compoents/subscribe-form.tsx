@@ -12,7 +12,7 @@ export function SubscribeForm() {
   return (
     <>
       <form
-        className="flex flex-col sm:flex-row gap-2 mt-8"
+        className="flex flex-col sm:flex-row gap-3 mt-8"
         onSubmit={async (e) => {
           e.preventDefault();
           const form = e.target as HTMLFormElement;
@@ -35,12 +35,12 @@ export function SubscribeForm() {
           });
         }}
       >
-        <div className="flex flex-col gap-2 w-full">
+        <div className="flex-1">
           <label htmlFor="email-address" className="sr-only">
             Email address
           </label>
           <input
-            className="min-w-0 flex-auto rounded-md border-0 bg-white px-3.5 py-2 text-black shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-cyan-500 sm:text-sm sm:leading-6"
+            className="input-field"
             id="email"
             name="email"
             type="email"
@@ -51,18 +51,18 @@ export function SubscribeForm() {
         <button
           type="submit"
           disabled={isPending}
-          className="rounded-md bg-white border-red-400 border px-3.5 py-2.5 text-sm font-semibold hover:text-white text-red-400 shadow-sm hover:bg-red-400 disabled:text-gray-500 disabled:bg-gray-200 disabled:border-gray-400 disabled:pointer-events-none"
+          className="button-primary whitespace-nowrap"
         >
           {isPending ? "Subscribing..." : "Subscribe"}
         </button>
       </form>
-      <p className="text-xs text-gray-500 mt-2">
+      <p className="text-xs text-muted-foreground mt-2">
         This site is protected by reCAPTCHA and the Google{" "}
         <a
           href="https://policies.google.com/privacy"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-500 hover:underline"
+          className="text-primary hover:text-primary/90 hover:underline"
         >
           Privacy Policy
         </a>{" "}
@@ -71,7 +71,7 @@ export function SubscribeForm() {
           href="https://policies.google.com/terms"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-500 hover:underline"
+          className="text-primary hover:text-primary/90 hover:underline"
         >
           Terms of Service
         </a>{" "}
