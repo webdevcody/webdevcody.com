@@ -6,7 +6,7 @@ import NewsletterSection from "./_compoents/newsletter-section";
 
 export default function Home() {
   return (
-    <main className="py-24 flex flex-col gap-24 container mx-auto">
+    <main className="flex flex-col container mx-auto">
       <HeroSection />
       <NewsletterSection />
       <AboutSection />

@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 const courses = [
   {
@@ -21,50 +25,72 @@ const courses = [
 
 export default function CoursesPage() {
   return (
-    <div className="container mx-auto py-12 max-w-4xl px-4">
-      <h1 className="text-4xl mb-8">My Courses</h1>
-
-      <p className="text-xl mb-8">
+    <div className="container mx-auto py-12 px-4">
+      <h1 className="text-4xl font-bold text-center mb-4 text-foreground">
+        My Courses
+      </h1>
+      <p className="text-xl text-center mb-12 text-muted-foreground">
         Here is a list of all of my paid courses which you can buy to help learn
         about web development.
       </p>
 
-      {courses.map((course, index) => (
-        <div key={course.title}>
-          <div className="flex flex-col md:flex-row gap-8 mb-8">
-            <a
-              href={course.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative w-full md:w-[200px] h-[200px] flex-shrink-0 hover:opacity-80 transition-opacity"
-            >
-              <Image
-                fill
-                src={course.imageUrl}
-                alt={course.title}
-                className="rounded-lg object-contain"
-                sizes="(max-width: 768px) 100vw, 200px"
-              />
-            </a>
+      <div className="grid gap-8 max-w-5xl mx-auto">
+        {courses.map((course, index) => (
+          <motion.div
+            key={course.title}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.2 }}
+            className="relative group"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 dark:from-blue-500/30 dark:to-purple-500/30 rounded-2xl blur-xl transform -rotate-2" />
+            <div className="relative bg-background dark:bg-background rounded-xl border border-border/40 overflow-hidden shadow-xl dark:shadow-2xl ring-1 ring-black/5 dark:ring-white/10">
+              <div className="flex flex-col md:flex-row gap-8 p-6">
+                <div className="relative w-full md:w-[300px] h-[200px] flex-shrink-0">
+                  <Image
+                    fill
+                    src={course.imageUrl}
+                    alt={course.title}
+                    className="rounded-lg object-contain"
+                    sizes="(max-width: 768px) 100vw, 300px"
+                  />
+                </div>
 
-            <div>
-              <h2 className="text-2xl font-bold mb-4">{course.title}</h2>
-              <p className="text-lg mb-4">{course.description}</p>
-              <a
-                href={course.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:underline hover:text-blue-500 text-blue-400"
-              >
-                View My Course
-              </a>
+                <div className="flex flex-col flex-1">
+                  <h2 className="text-2xl font-bold mb-4 text-foreground">
+                    {course.title}
+                  </h2>
+                  <p className="text-lg mb-6 text-muted-foreground flex-1">
+                    {course.description}
+                  </p>
+                  <div>
+                    <a
+                      href={course.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`View course: ${course.title} (opens in new tab)`}
+                      className="group inline-flex items-center gap-2 px-6 py-3 font-medium 
+                        bg-primary text-primary-foreground rounded-lg
+                        transition-all duration-200
+                        hover:bg-primary-foreground hover:text-primary
+                        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
+                        focus-visible:ring-offset-2 focus-visible:ring-offset-background
+                        active:bg-primary-foreground/90 active:scale-[0.98]
+                        disabled:pointer-events-none disabled:opacity-50"
+                    >
+                      <span>View Course</span>
+                      <ArrowRight
+                        className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          {index < courses.length - 1 && (
-            <hr className="border-gray-700 my-8" />
-          )}
-        </div>
-      ))}
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 }

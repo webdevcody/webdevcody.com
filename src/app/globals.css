@@ -81,12 +81,21 @@
   }
   body {
     @apply bg-background text-foreground transition-colors duration-300 min-h-screen flex flex-col;
-    background-image: 
-      radial-gradient(circle at 50% 0%, 
-        hsl(232 47% 10%) 0%, 
-        hsl(232 47% 5%) 50%,
-        hsl(232 47% 3%) 100%
-      );
+  }
+  body.dark {
+    background-image: radial-gradient(
+      circle at 50% 0%,
+      hsl(var(--background) / 0.9) 0%,
+      hsl(var(--background)) 50%,
+      hsl(var(--background)) 100%
+    );
+  }
+  body.light {
+    background-image: radial-gradient(
+      circle at 50% 0%,
+      hsl(var(--background)) 0%,
+      hsl(var(--background)) 100%
+    );
   }
   main {
     @apply flex-grow relative;
@@ -107,7 +116,7 @@
     @apply text-primary hover:text-primary/90 transition-colors font-medium;
   }
   footer {
-    @apply bg-black/20 backdrop-blur-xl mt-20 py-16 border-t border-white/5;
+    @apply bg-muted/50 backdrop-blur-xl mt-20 py-16 border-t border-border/40;
   }
   footer a {
     @apply text-muted-foreground hover:text-foreground transition-colors;
@@ -220,4 +229,21 @@
   body.menu-open {
     overflow: hidden;
   }
+}
+
+.wave {
+  animation: wave 2.5s infinite;
+  display: inline-block;
+  transform-origin: 70% 70%;
+}
+
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+  60% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
 }

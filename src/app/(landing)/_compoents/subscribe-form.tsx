@@ -40,7 +40,7 @@ export function SubscribeForm() {
             Email address
           </label>
           <input
-            className="input-field"
+            className="w-full px-4 py-2.5 bg-white dark:bg-background border border-border/40 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 rounded-lg outline-none transition-colors duration-200 placeholder:text-muted-foreground/70"
             id="email"
             name="email"
             type="email"
@@ -51,7 +51,7 @@ export function SubscribeForm() {
         <button
           type="submit"
           disabled={isPending}
-          className="button-primary whitespace-nowrap"
+          className="px-6 py-2.5 font-medium bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm shadow-primary/10 hover:shadow-primary/20"
         >
           {isPending ? "Subscribing..." : "Subscribe"}
         </button>

@@ -1,5 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
+import ProductCard from "./ProductCard";
 
 export default function ProductsPage() {
   const products = [
@@ -21,36 +20,15 @@ export default function ProductsPage() {
 
   return (
     <main className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold text-center mb-12">My Products</h1>
-      <p className="text-center mb-12">
+      <h1 className="text-4xl font-bold text-center mb-12 text-foreground">
+        My Products
+      </h1>
+      <p className="text-center mb-12 text-muted-foreground">
         Checkout some of my side projects I&apos;ve built over the years.
       </p>
       <div className="grid md:grid-cols-2 gap-8">
         {products.map((product, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-lg shadow-lg overflow-hidden"
-          >
-            <div className="relative h-64">
-              <Image
-                src={product.image}
-                alt={product.title}
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="p-6">
-              <h2 className="text-2xl font-bold mb-4">{product.title}</h2>
-              <p className="text-gray-600 mb-4">{product.description}</p>
-              <Link
-                href={product.link}
-                target="_blank"
-                className="inline-block bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors"
-              >
-                Learn More
-              </Link>
-            </div>
-          </div>
+          <ProductCard key={index} product={product} index={index} />
         ))}
       </div>
     </main>
