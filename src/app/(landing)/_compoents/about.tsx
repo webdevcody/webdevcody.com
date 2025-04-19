@@ -63,19 +63,16 @@ export function AboutSection() {
         </h1>
 
         <div className="relative max-w-3xl mx-auto">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 dark:from-blue-500/30 dark:to-purple-500/30 rounded-2xl blur-xl transform -rotate-2" />
-          <div className="relative bg-background/80 backdrop-blur-sm rounded-xl border border-border/40 p-6 shadow-xl">
-            <p className="text-lg leading-8 text-muted-foreground">
-              I&apos;m Cody and I&apos;ve been working as a web developer in
-              this industry for over{" "}
-              <strong className="text-foreground">10 years</strong>. When I get
-              time, I publish tutorial videos on my youtube channel to help
-              teach others about web development and how to code, but I will say
-              my heart is in entrepreneurship; I&apos;m often thinking of new
-              application ideas I could build and turn into a successful SaaS
-              business.
-            </p>
-          </div>
+          <p className="text-lg leading-8 text-muted-foreground">
+            I&apos;m Cody and I&apos;ve been working as a web developer in this
+            industry for over{" "}
+            <strong className="text-foreground">10 years</strong>. When I get
+            time, I publish tutorial videos on my youtube channel to help teach
+            others about web development and how to code, but I will say my
+            heart is in entrepreneurship; I&apos;m often thinking of new
+            application ideas I could build and turn into a successful SaaS
+            business.
+          </p>
         </div>
       </motion.div>
 
