@@ -36,7 +36,7 @@ export default function RootLayout({
         dangerouslySetInnerHTML={{
           __html: `
             window.sherpa = {
-              siteId: 'kn7369r042qebeaxcm4d24fxg57e83b1'
+              siteId: 'kn71crk59a0zv8epkwygcc9ay57ect8j'
             }
           `,
         }}
