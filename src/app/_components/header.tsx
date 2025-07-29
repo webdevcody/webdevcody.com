@@ -55,6 +55,12 @@ export default function Header() {
           >
             CONTACT
           </Link>
+          <Link
+            href="https://suggestions.webdevcody.com"
+            className="nav-link text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
+          >
+            SUBMIT VIDEO SUGGESTION
+          </Link>
         </nav>
 
         <div className="flex items-center gap-4">

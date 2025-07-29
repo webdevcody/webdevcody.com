@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Script
+      {/* <Script
         id="sensei-script"
         dangerouslySetInnerHTML={{
           __html: `
@@ -41,7 +41,7 @@ export default function RootLayout({
           `,
         }}
       />
-      <Script src="https://thesitesherpa.com/widget.js"></Script>
+      <Script src="https://thesitesherpa.com/widget.js"></Script> */}
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
