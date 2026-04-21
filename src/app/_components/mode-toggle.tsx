@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { flushSync } from "react-dom";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -12,13 +13,74 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+type ViewTransitionDocument = Document & {
+  startViewTransition?: (callback: () => void) => {
+    ready: Promise<void>;
+    finished: Promise<void>;
+  };
+};
+
 export function ModeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
+  const buttonRef = React.useRef<HTMLButtonElement>(null);
+
+  const changeTheme = React.useCallback(
+    (nextTheme: "light" | "dark" | "system") => {
+      const doc = document as ViewTransitionDocument;
+
+      const resolvedNext =
+        nextTheme === "system"
+          ? window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light"
+          : nextTheme;
+
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      if (
+        !doc.startViewTransition ||
+        prefersReducedMotion ||
+        resolvedNext === resolvedTheme
+      ) {
+        setTheme(nextTheme);
+        return;
+      }
+
+      const trigger = buttonRef.current;
+      const rect = trigger?.getBoundingClientRect();
+      const x = rect ? rect.left + rect.width / 2 : window.innerWidth / 2;
+      const y = rect ? rect.top + rect.height / 2 : window.innerHeight / 2;
+      const endRadius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y)
+      );
+
+      const root = document.documentElement;
+      root.style.setProperty("--theme-x", `${x}px`);
+      root.style.setProperty("--theme-y", `${y}px`);
+      root.style.setProperty("--theme-r", `${endRadius}px`);
+      root.dataset.themeAnimating = "true";
+
+      const transition = doc.startViewTransition(() => {
+        flushSync(() => {
+          setTheme(nextTheme);
+        });
+      });
+
+      transition.finished.finally(() => {
+        delete root.dataset.themeAnimating;
+      });
+    },
+    [resolvedTheme, setTheme]
+  );
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
+          ref={buttonRef}
           variant="ghost"
           size="icon"
           className="relative h-8 w-8 hover:bg-white/5"
@@ -34,19 +96,19 @@ export function ModeToggle() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="bg-white/10 backdrop-blur-xl">
         <DropdownMenuItem
-          onClick={() => setTheme("light")}
+          onClick={() => changeTheme("light")}
           className="hover:bg-white/10"
         >
           Light
         </DropdownMenuItem>
         <DropdownMenuItem
-          onClick={() => setTheme("dark")}
+          onClick={() => changeTheme("dark")}
           className="hover:bg-white/10"
         >
           Dark
         </DropdownMenuItem>
         <DropdownMenuItem
-          onClick={() => setTheme("system")}
+          onClick={() => changeTheme("system")}
           className="hover:bg-white/10"
         >
           System

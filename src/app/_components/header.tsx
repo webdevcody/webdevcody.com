@@ -2,19 +2,27 @@ import { GithubIcon, YoutubeIcon } from "@/components/icons";
 import Image from "next/image";
 import Link from "next/link";
 import { profile } from "@/data/profile";
+import { products } from "@/data/products";
+import { courses } from "@/data/courses";
 import { ModeToggle } from "./mode-toggle";
 import { MessageCircleHeart } from "lucide-react";
 import FeedbackButton from "./feedback-button";
 import MobileMenu from "./mobile-menu";
-
-const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Products", href: "/products" },
-  { label: "Courses", href: "/courses" },
-  { label: "Contact", href: "/contact" },
-];
+import { NavDropdown, type NavDropdownItem } from "./nav-dropdown";
 
 export default function Header() {
+  const productItems: NavDropdownItem[] = products.map((product) => ({
+    title: product.title,
+    description: product.tagline,
+    href: `/products/${product.slug}`,
+  }));
+
+  const courseItems: NavDropdownItem[] = courses.map((course) => ({
+    title: course.shortTitle,
+    description: course.description,
+    href: `/courses/${course.slug}`,
+  }));
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70">
       <div className="container mx-auto flex h-16 items-center justify-between px-6">
@@ -36,15 +44,30 @@ export default function Header() {
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </Link>
-          ))}
+          <Link
+            href="/"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Home
+          </Link>
+          <NavDropdown
+            label="Products"
+            items={productItems}
+            viewAllHref="/products"
+            viewAllLabel="View all products"
+          />
+          <NavDropdown
+            label="Courses"
+            items={courseItems}
+            viewAllHref="/courses"
+            viewAllLabel="View all courses"
+          />
+          <Link
+            href="/contact"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Contact
+          </Link>
         </nav>
 
         <div className="flex items-center gap-1.5">

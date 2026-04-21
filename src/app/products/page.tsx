@@ -19,7 +19,11 @@ export default function ProductsPage() {
 
       <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
         {products.map((product) => (
-          <ProjectCard key={product.title} project={product} />
+          <ProjectCard
+            key={product.slug}
+            project={product}
+            href={`/products/${product.slug}`}
+          />
         ))}
       </div>
     </main>

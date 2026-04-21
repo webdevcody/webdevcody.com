@@ -38,16 +38,22 @@ export function Footer() {
                 Products
               </h3>
               <ul className="mt-4 space-y-3">
+                <li>
+                  <Link
+                    href="/products"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    All products
+                  </Link>
+                </li>
                 {products.map((product) => (
-                  <li key={product.title}>
-                    <a
-                      href={product.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                  <li key={product.slug}>
+                    <Link
+                      href={`/products/${product.slug}`}
                       className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {product.title}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -66,21 +72,16 @@ export function Footer() {
                     All courses
                   </Link>
                 </li>
-                {courses.map((course) => {
-                  const shortTitle = course.title.split("—")[0]?.trim() ?? course.title;
-                  return (
-                    <li key={course.title}>
-                      <a
-                        href={course.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="line-clamp-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                      >
-                        {shortTitle}
-                      </a>
-                    </li>
-                  );
-                })}
+                {courses.map((course) => (
+                  <li key={course.slug}>
+                    <Link
+                      href={`/courses/${course.slug}`}
+                      className="line-clamp-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {course.shortTitle}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 

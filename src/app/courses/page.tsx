@@ -20,11 +20,21 @@ export default function CoursesPage() {
       />
 
       <div className="mt-16 flex flex-col gap-8">
-        {featured ? <CourseCard course={featured} variant="featured" /> : null}
+        {featured ? (
+          <CourseCard
+            course={featured}
+            variant="featured"
+            href={`/courses/${featured.slug}`}
+          />
+        ) : null}
         {rest.length > 0 ? (
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {rest.map((course) => (
-              <CourseCard key={course.title} course={course} />
+              <CourseCard
+                key={course.slug}
+                course={course}
+                href={`/courses/${course.slug}`}
+              />
             ))}
           </div>
         ) : null}

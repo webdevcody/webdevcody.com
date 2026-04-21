@@ -18,23 +18,26 @@ export interface ProjectCardData {
 interface ProjectCardProps {
   project: ProjectCardData;
   className?: string;
+  href?: string;
 }
 
-export function ProjectCard({ project, className }: ProjectCardProps) {
+export function ProjectCard({ project, className, href }: ProjectCardProps) {
   const [imageFailed, setImageFailed] = useState(false);
   const showImage = project.image && !imageFailed;
   const initial = project.title.charAt(0).toUpperCase();
+  const isInternal = Boolean(href);
+  const linkHref = href ?? project.url;
 
   return (
     <Link
-      href={project.url}
-      target="_blank"
-      rel="noopener noreferrer"
+      href={linkHref}
+      target={isInternal ? undefined : "_blank"}
+      rel={isInternal ? undefined : "noopener noreferrer"}
       className={cn(
         "group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:border-accent/60 hover:-translate-y-0.5",
         className
       )}
-      aria-label={`${project.title} — ${project.tagline} (opens in new tab)`}
+      aria-label={`${project.title} — ${project.tagline}${isInternal ? "" : " (opens in new tab)"}`}
     >
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
         {showImage ? (

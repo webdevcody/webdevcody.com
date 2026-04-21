@@ -28,7 +28,11 @@ export default function FeaturedProducts() {
 
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => (
-            <ProjectCard key={product.title} project={product} />
+            <ProjectCard
+              key={product.slug}
+              project={product}
+              href={`/products/${product.slug}`}
+            />
           ))}
         </div>
       </div>

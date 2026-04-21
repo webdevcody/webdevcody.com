@@ -19,28 +19,33 @@ interface CourseCardProps {
   course: CourseCardData;
   variant?: "horizontal" | "featured";
   className?: string;
+  href?: string;
 }
 
 export function CourseCard({
   course,
   variant = "horizontal",
   className,
+  href,
 }: CourseCardProps) {
   const [imageFailed, setImageFailed] = useState(false);
   const showImage = course.image && !imageFailed;
   const initial = course.title.charAt(0).toUpperCase();
+  const isInternal = Boolean(href);
+  const linkHref = href ?? course.url;
+  const ariaLabel = `${course.title}${isInternal ? "" : " (opens in new tab)"}`;
 
   if (variant === "featured") {
     return (
       <Link
-        href={course.url}
-        target="_blank"
-        rel="noopener noreferrer"
+        href={linkHref}
+        target={isInternal ? undefined : "_blank"}
+        rel={isInternal ? undefined : "noopener noreferrer"}
         className={cn(
           "group relative grid grid-cols-1 gap-6 overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:border-accent/60 hover:-translate-y-0.5 md:grid-cols-[1.1fr_1fr] md:gap-10 md:p-8",
           className
         )}
-        aria-label={`${course.title} (opens in new tab)`}
+        aria-label={ariaLabel}
       >
         <div className="flex flex-col justify-between gap-6">
           <div className="flex flex-col gap-3">
@@ -91,14 +96,14 @@ export function CourseCard({
 
   return (
     <Link
-      href={course.url}
-      target="_blank"
-      rel="noopener noreferrer"
+      href={linkHref}
+      target={isInternal ? undefined : "_blank"}
+      rel={isInternal ? undefined : "noopener noreferrer"}
       className={cn(
         "group relative flex flex-col gap-5 overflow-hidden rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:border-accent/60 hover:-translate-y-0.5 sm:flex-row sm:items-center sm:p-6",
         className
       )}
-      aria-label={`${course.title} (opens in new tab)`}
+      aria-label={ariaLabel}
     >
       <div className="relative aspect-video w-full flex-shrink-0 overflow-hidden rounded-lg border border-border bg-muted sm:h-32 sm:w-56">
         {showImage ? (
