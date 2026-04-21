@@ -1,0 +1,14 @@
+{
+  "id": "newsletter-subscription",
+  "title": "Newsletter Subscription System",
+  "description": "Email subscription form with React Hook Form validation, reCAPTCHA protection, and external mailing list API integration. Includes success/error handling with toast notifications.",
+  "status": "backlog",
+  "priority": 1,
+  "complexity": "moderate",
+  "dependencies": [
+    "recaptcha-protection",
+    "hero-section-youtube"
+  ],
+  "createdAt": "2025-12-14T04:12:45.145Z",
+  "updatedAt": "2025-12-14T04:12:45.145Z"
+}

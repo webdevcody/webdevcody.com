@@ -1,0 +1,13 @@
+{
+  "id": "products-portfolio",
+  "title": "Products Showcase Page",
+  "description": "Portfolio page for side projects and SaaS products with product cards, descriptions, and external links. Showcases Project Planner AI, Icon Generator AI, and other tools.",
+  "status": "backlog",
+  "priority": 1,
+  "complexity": "simple",
+  "dependencies": [
+    "courses-showcase"
+  ],
+  "createdAt": "2025-12-14T04:12:45.148Z",
+  "updatedAt": "2025-12-14T04:12:45.148Z"
+}

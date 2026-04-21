@@ -1,34 +1,25 @@
-import ProductCard from "./ProductCard";
+import { ProjectCard } from "@/components/project-card";
+import { SectionHeading } from "@/components/section-heading";
+import { products } from "@/data/products";
+
+export const metadata = {
+  title: "Products",
+  description:
+    "SaaS products I've built and continue to maintain. From AI-powered video editing to icon generation and project planning.",
+};
 
 export default function ProductsPage() {
-  const products = [
-    {
-      title: "Project Planner AI",
-      description:
-        "An intelligent AI assistant that helps you plan, organize, and manage your projects efficiently. Get smart task breakdowns, timelines, and resource allocation suggestions.",
-      image: "https://projectplannerai.com/landing/hero1-dark.png",
-      link: "https://projectplannerai.com/",
-    },
-    {
-      title: "Icon Generator AI",
-      description:
-        "Create beautiful, custom icons instantly with AI. Generate consistent icon sets for your applications, websites, or design projects with just a few clicks.",
-      image: "https://icongeneratorai.com/static/app.png",
-      link: "https://icongeneratorai.com",
-    },
-  ];
-
   return (
-    <main className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold text-center mb-12 text-foreground">
-        My Products
-      </h1>
-      <p className="text-center mb-12 text-muted-foreground">
-        Checkout some of my side projects I&apos;ve built over the years.
-      </p>
-      <div className="grid md:grid-cols-2 gap-8">
-        {products.map((product, index) => (
-          <ProductCard key={index} product={product} index={index} />
+    <main className="container mx-auto px-6 py-20 sm:py-24">
+      <SectionHeading
+        eyebrow="Products"
+        title="Things I've built and shipped"
+        description="A growing catalog of SaaS products I've built over the years. Each one started as an itch I had to scratch — and became a real business."
+      />
+
+      <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {products.map((product) => (
+          <ProjectCard key={product.title} project={product} />
         ))}
       </div>
     </main>

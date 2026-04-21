@@ -1,79 +1,59 @@
-import { GithubIcon, XIcon, YoutubeIcon } from "@/components/icons";
+import { GithubIcon, YoutubeIcon } from "@/components/icons";
 import Image from "next/image";
 import Link from "next/link";
 import { ModeToggle } from "./mode-toggle";
 import { MessageCircleHeart } from "lucide-react";
 import FeedbackButton from "./feedback-button";
-import { Button } from "@/components/ui/button";
 import MobileMenu from "./mobile-menu";
+
+const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "Products", href: "/products" },
+  { label: "Courses", href: "/courses" },
+  { label: "Contact", href: "/contact" },
+];
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70">
+      <div className="container mx-auto flex h-16 items-center justify-between px-6">
         <Link
           href="/"
-          className="flex items-center gap-4 transition-colors duration-200"
+          className="flex items-center gap-3 transition-opacity hover:opacity-90"
         >
-          <div className="rounded-lg overflow-hidden ring-1 ring-border/40">
+          <div className="overflow-hidden rounded-lg border border-border">
             <Image
               src="/wdc.jpeg"
-              width="40"
-              height="40"
-              alt="web dev cody logo"
-              className="hover:scale-105 transition-transform duration-200"
+              width="32"
+              height="32"
+              alt="Web Dev Cody logo"
             />
           </div>
-          <span className="font-semibold bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
-            Web Dev Cody
+          <span className="font-semibold text-foreground">
+            Cody Seibert
           </span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-8">
-          <Link
-            href="/"
-            className="nav-link text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
-          >
-            HOME
-          </Link>
-          <Link
-            href="/courses"
-            className="nav-link text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
-          >
-            COURSES
-          </Link>
-          <Link
-            href="/products"
-            className="nav-link text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
-          >
-            MY PRODUCTS
-          </Link>
-          <Link
-            href="/contact"
-            className="nav-link text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
-          >
-            CONTACT
-          </Link>
-          <Link
-            href="https://suggestions.webdevcody.com"
-            className="nav-link text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
-          >
-            SUBMIT VIDEO SUGGESTION
-          </Link>
+        <nav className="hidden items-center gap-8 lg:flex">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-1.5">
           <FeedbackButton
             triggerContent={
               <button
                 title="Leave Suggestion"
-                className="rounded-lg p-2 hover:bg-muted/80 transition-colors"
+                className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
               >
-                <MessageCircleHeart
-                  size={20}
-                  className="text-muted-foreground hover:text-primary transition-colors duration-200"
-                />
+                <MessageCircleHeart size={18} />
               </button>
             }
           />
@@ -82,25 +62,26 @@ export default function Header() {
             href="https://youtube.com/@webdevcody"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:block rounded-lg p-2 hover:bg-muted/80 transition-colors group"
+            className="hidden rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground md:inline-flex"
+            aria-label="YouTube"
           >
-            <YoutubeIcon className="w-5 h-5 text-muted-foreground dark:fill-white group-hover:text-red-500 transition-colors duration-200" />
+            <YoutubeIcon className="h-[18px] w-[18px] fill-current" />
           </Link>
 
           <Link
-            className="hidden md:block rounded-lg p-2 hover:bg-muted/80 transition-colors group"
             href="https://github.com/webdevcody"
             target="_blank"
             rel="noopener noreferrer"
+            className="hidden rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground md:inline-flex"
+            aria-label="GitHub"
           >
-            <GithubIcon className="w-5 h-5 fill-black dark:fill-white group-hover:text-primary transition-colors duration-200" />
+            <GithubIcon className="h-[18px] w-[18px] fill-current" />
           </Link>
 
-          <div className="rounded-lg p-1 hover:bg-muted/80 transition-colors">
+          <div className="rounded-full">
             <ModeToggle />
           </div>
 
-          {/* Mobile Menu */}
           <MobileMenu />
         </div>
       </div>

@@ -1,0 +1,13 @@
+{
+  "id": "hero-section-youtube",
+  "title": "Hero Section with YouTube Embed",
+  "description": "Build landing page hero section with compelling headline, description, and embedded YouTube video player. Features Framer Motion animations and responsive design.",
+  "status": "backlog",
+  "priority": 1,
+  "complexity": "simple",
+  "dependencies": [
+    "responsive-navigation"
+  ],
+  "createdAt": "2025-12-14T04:12:45.144Z",
+  "updatedAt": "2025-12-14T04:12:45.144Z"
+}

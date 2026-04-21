@@ -1,0 +1,14 @@
+{
+  "id": "analytics-tracking",
+  "title": "Custom Analytics System",
+  "description": "Analytics event tracking with SendEventOnLoad component for page views and user interactions. Provides insights into user behavior and content performance.",
+  "status": "backlog",
+  "priority": 3,
+  "complexity": "simple",
+  "dependencies": [
+    "contact-hub",
+    "legal-pages"
+  ],
+  "createdAt": "2025-12-14T04:12:45.149Z",
+  "updatedAt": "2025-12-14T04:12:45.149Z"
+}

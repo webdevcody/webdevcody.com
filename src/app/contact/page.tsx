@@ -6,117 +6,102 @@ import {
   Mail,
   Github,
   Youtube,
-  ArrowRight,
+  ArrowUpRight,
 } from "lucide-react";
 import FeedbackButton from "@/app/_components/feedback-button";
+import { SectionHeading } from "@/components/section-heading";
+import { profile } from "@/data/profile";
 
 export default function ContactPage() {
   const contactLinks = [
     {
       title: "Discord Community",
       description:
-        "Join our Discord community to chat, learn, and grow together",
+        "Join the community to chat, learn, and build alongside other developers.",
       icon: MessageCircleHeart,
-      href: "https://discord.gg/webdevcody",
-      color: "bg-[#5865F2]",
+      href: profile.social.discord,
     },
     {
       title: "YouTube Channel",
       description:
-        "Subscribe to my channel for web development tutorials and tips",
+        "Subscribe for weekly web-development tutorials, project walkthroughs, and deep dives.",
       icon: Youtube,
-      href: "https://youtube.com/@webdevcody",
-      color: "bg-red-500",
+      href: profile.social.youtube,
     },
     {
-      title: "GitHub Profile",
-      description: "Check out my open source projects and contributions",
+      title: "GitHub",
+      description:
+        "Check out my open-source projects, examples, and experiments.",
       icon: Github,
-      href: "https://github.com/webdevcody",
-      color: "bg-gray-900 dark:bg-white dark:text-gray-900",
+      href: profile.social.github,
     },
     {
-      title: "Email Me",
-      description: "Send me an email for business inquiries or questions",
+      title: "Email",
+      description:
+        "Best for business inquiries, sponsorships, or longer questions.",
       icon: Mail,
-      href: "mailto:webdevcody@gmail.com",
-      color: "bg-blue-500",
+      href: `mailto:${profile.email}`,
     },
   ];
 
   return (
-    <main className="container mx-auto py-12 px-4">
-      <div className="max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-4xl font-bold mb-4 text-foreground">
-            Get in Touch
-          </h1>
-          <p className="text-xl text-muted-foreground">
-            Have a question or want to work together? I&apos;d love to hear from
-            you!
-          </p>
-        </motion.div>
+    <main className="container mx-auto px-6 py-20 sm:py-24">
+      <div className="mx-auto max-w-4xl">
+        <SectionHeading
+          eyebrow="Say hi"
+          title="Get in touch"
+          description="Have a question, an idea for a collaboration, or just want to say hello? Here are the best ways to reach me."
+          align="center"
+          className="mx-auto"
+        />
 
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
-          {contactLinks.map((link, index) => (
-            <motion.a
-              key={link.title}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 dark:from-blue-500/30 dark:to-purple-500/30 rounded-2xl blur-xl transform -rotate-2" />
-              <div className="relative p-6 bg-background dark:bg-background rounded-xl border border-border/40 overflow-hidden shadow-xl dark:shadow-2xl ring-1 ring-black/5 dark:ring-white/10 flex items-center gap-4 group-hover:border-border/80 transition-all duration-200">
-                <div className={`p-3 rounded-lg ${link.color} text-white`}>
-                  <link.icon size={24} />
+        <div className="mt-16 grid grid-cols-1 gap-4 md:grid-cols-2">
+          {contactLinks.map((link, index) => {
+            const Icon = link.icon;
+            return (
+              <motion.a
+                key={link.title}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.06 }}
+                className="group relative flex items-start gap-4 rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/60 hover:-translate-y-0.5"
+              >
+                <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-border bg-muted text-muted-foreground transition-colors group-hover:text-accent">
+                  <Icon className="h-5 w-5" />
                 </div>
                 <div className="flex-1">
-                  <h2 className="text-xl font-semibold mb-1 text-foreground flex items-center gap-2">
+                  <h2 className="flex items-center gap-2 text-lg font-semibold text-foreground">
                     {link.title}
-                    <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+                    <ArrowUpRight
+                      className="h-4 w-4 text-muted-foreground transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
+                      aria-hidden="true"
+                    />
                   </h2>
-                  <p className="text-muted-foreground">{link.description}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                    {link.description}
+                  </p>
                 </div>
-              </div>
-            </motion.a>
-          ))}
+              </motion.a>
+            );
+          })}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-center"
-        >
-          <div className="inline-block">
-            <FeedbackButton
-              triggerContent={
-                <button
-                  className="group inline-flex items-center gap-2 px-6 py-3 font-medium 
-                  bg-primary text-primary-foreground rounded-lg
-                  transition-all duration-200
-                  hover:bg-primary-foreground hover:text-primary
-                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
-                  focus-visible:ring-offset-2 focus-visible:ring-offset-background
-                  active:bg-primary-foreground/90 active:scale-[0.98]"
-                >
-                  <MessageCircleHeart className="w-5 h-5" />
-                  <span>Leave a Suggestion</span>
-                  <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-                </button>
-              }
-            />
-          </div>
-        </motion.div>
+        <div className="mt-12 flex justify-center">
+          <FeedbackButton
+            triggerContent={
+              <button
+                className="group inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-medium text-foreground transition-all hover:border-accent/60 hover:text-accent"
+              >
+                <MessageCircleHeart className="h-4 w-4" />
+                <span>Leave a video suggestion</span>
+                <ArrowUpRight className="h-4 w-4 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </button>
+            }
+          />
+        </div>
       </div>
     </main>
   );

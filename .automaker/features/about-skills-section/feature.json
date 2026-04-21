@@ -1,0 +1,13 @@
+{
+  "id": "about-skills-section",
+  "title": "About & Skills Showcase",
+  "description": "Landing page section displaying creator bio and categorized skills grid (Frontend, Backend, Practices, Business). Features animated cards with Framer Motion hover effects.",
+  "status": "backlog",
+  "priority": 2,
+  "complexity": "simple",
+  "dependencies": [
+    "hero-section-youtube"
+  ],
+  "createdAt": "2025-12-14T04:12:45.147Z",
+  "updatedAt": "2025-12-14T04:12:45.147Z"
+}

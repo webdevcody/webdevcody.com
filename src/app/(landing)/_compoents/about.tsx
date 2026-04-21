@@ -1,154 +1,98 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { SectionHeading } from "@/components/section-heading";
 
-const skillCategories = [
+const skillGroups: { title: string; skills: string[] }[] = [
   {
-    title: "Frontend Development",
+    title: "Frontend",
     skills: [
-      { name: "React", icon: "🚀" },
-      { name: "Next.js", icon: "🔥" },
-      { name: "TailwindCSS", icon: "🎨" },
-      { name: "TypeScript", icon: "📘" },
-      { name: "JavaScript", icon: "💛" },
-      { name: "HTML/CSS", icon: "🎯" },
+      "React",
+      "Next.js",
+      "TypeScript",
+      "TailwindCSS",
+      "Framer Motion",
+      "HTML / CSS",
     ],
   },
   {
-    title: "Backend & Infrastructure",
+    title: "Backend & Cloud",
     skills: [
-      { name: "Node.js", icon: "🔧" },
-      { name: "AWS", icon: "☁️" },
-      { name: "Serverless", icon: "⚡" },
-      { name: "Terraform", icon: "🌍" },
-      { name: "IaC Tooling", icon: "🛠️" },
-      { name: "Docker", icon: "🐳" },
+      "Node.js",
+      "AWS",
+      "Serverless",
+      "Terraform",
+      "Docker",
+      "PostgreSQL",
     ],
   },
   {
-    title: "Development Practices",
+    title: "Craft",
     skills: [
-      { name: "CI/CD", icon: "🚦" },
-      { name: "Automated Testing", icon: "🧪" },
-      { name: "Agile Development", icon: "🏃" },
-      { name: "Git Flow", icon: "🌳" },
-      { name: "Code Reviews", icon: "👀" },
-      { name: "Documentation", icon: "📚" },
-    ],
-  },
-  {
-    title: "Business & Development",
-    skills: [
-      { name: "Full Stack Development", icon: "💻" },
-      { name: "Product Development", icon: "🔨" },
-      { name: "Entrepreneurship", icon: "📈" },
-      { name: "Project Management", icon: "📋" },
-      { name: "Technical Writing", icon: "✍️" },
-      { name: "Team Leadership", icon: "👥" },
+      "Full-stack delivery",
+      "Product building",
+      "CI / CD",
+      "Automated testing",
+      "Technical writing",
+      "Mentorship",
     ],
   },
 ];
 
 export function AboutSection() {
   return (
-    <div className="max-w-5xl mx-auto px-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="text-center mb-16"
-      >
-        <h1 className="text-4xl font-bold mb-6 text-foreground">
-          About Me <span className="wave">👋</span>
-        </h1>
-
-        <div className="relative max-w-3xl mx-auto">
-          <p className="text-lg leading-8 text-muted-foreground">
-            I&apos;m Cody and I&apos;ve been working as a web developer in this
-            industry for over{" "}
-            <strong className="text-foreground">10 years</strong>. When I get
-            time, I publish tutorial videos on my youtube channel to help teach
-            others about web development and how to code, but I will say my
-            heart is in entrepreneurship; I&apos;m often thinking of new
-            application ideas I could build and turn into a successful SaaS
-            business.
-          </p>
-        </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="text-center mb-12"
-      >
-        <h2 className="text-2xl font-semibold mb-2 text-foreground">
-          My Tech Stack & Skills
-        </h2>
-        <p className="text-lg text-muted-foreground">
-          Technologies and processes I work with daily
-        </p>
-      </motion.div>
-
-      <div className="grid md:grid-cols-2 gap-6">
-        {skillCategories.map((category, categoryIndex) => (
+    <section className="section">
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.3fr] lg:gap-20">
           <motion.div
-            key={category.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: categoryIndex * 0.1 + 0.3 }}
-            className="relative group h-[320px]"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col gap-6"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 dark:from-blue-500/30 dark:to-purple-500/30 rounded-2xl blur-xl transform -rotate-2" />
-            <div className="relative h-full bg-background dark:bg-background rounded-xl border border-border/40 overflow-hidden shadow-xl dark:shadow-2xl ring-1 ring-black/5 dark:ring-white/10">
-              <div className="p-6 flex flex-col h-full">
-                <h3 className="text-xl font-semibold mb-4 text-foreground">
-                  {category.title}
-                </h3>
-                <div className="grid grid-cols-2 gap-3 flex-1">
-                  {category.skills.map((skill) => (
-                    <div
-                      key={skill.name}
-                      className="flex items-center gap-2 p-2 rounded-lg bg-muted/50 hover:bg-muted transition-colors duration-200"
-                    >
+            <SectionHeading
+              eyebrow="About"
+              title="A bit about me"
+              description="I'm Cody. I've been building software for over a decade. When I'm not shipping products or recording videos, you'll find me tinkering with the next thing I might turn into a business."
+            />
+            <p className="text-base leading-relaxed text-muted-foreground">
+              I fell in love with software because of what you can make with it
+              alone, in a weekend. That feeling still drives how I build, how I
+              teach, and why I keep shipping new things.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="flex flex-col gap-6"
+          >
+            <span className="eyebrow">Stack &amp; skills</span>
+            <div className="flex flex-col gap-8">
+              {skillGroups.map((group) => (
+                <div key={group.title} className="flex flex-col gap-3">
+                  <h4 className="text-sm font-semibold uppercase tracking-wider text-foreground">
+                    {group.title}
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {group.skills.map((skill) => (
                       <span
-                        className="text-2xl"
-                        role="img"
-                        aria-label={skill.name}
+                        key={skill}
+                        className="rounded-full border border-border bg-card px-3 py-1 text-sm text-muted-foreground transition-colors hover:border-accent/50 hover:text-foreground"
                       >
-                        {skill.icon}
+                        {skill}
                       </span>
-                      <span className="font-medium text-foreground text-sm">
-                        {skill.name}
-                      </span>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
           </motion.div>
-        ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
-
-// Add this to your global CSS file
-const styles = `
-.wave {
-  animation: wave 2.5s infinite;
-  display: inline-block;
-  transform-origin: 70% 70%;
-}
-
-@keyframes wave {
-  0% { transform: rotate(0deg); }
-  10% { transform: rotate(14deg); }
-  20% { transform: rotate(-8deg); }
-  30% { transform: rotate(14deg); }
-  40% { transform: rotate(-4deg); }
-  50% { transform: rotate(10deg); }
-  60% { transform: rotate(0deg); }
-  100% { transform: rotate(0deg); }
-}
-`;

@@ -1,0 +1,14 @@
+{
+  "id": "contact-hub",
+  "title": "Contact Hub Page",
+  "description": "Comprehensive contact page with animated cards linking to Discord, YouTube, GitHub, and email. Includes integrated video suggestion button and social media presence.",
+  "status": "backlog",
+  "priority": 2,
+  "complexity": "simple",
+  "dependencies": [
+    "video-suggestion-form",
+    "products-portfolio"
+  ],
+  "createdAt": "2025-12-14T04:12:45.148Z",
+  "updatedAt": "2025-12-14T04:12:45.148Z"
+}

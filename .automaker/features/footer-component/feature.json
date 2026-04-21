@@ -1,0 +1,14 @@
+{
+  "id": "footer-component",
+  "title": "Site Footer",
+  "description": "Complete footer with navigation links, social media icons, newsletter signup CTA, and legal page links. Responsive design with proper spacing and theme support.",
+  "status": "backlog",
+  "priority": 2,
+  "complexity": "simple",
+  "dependencies": [
+    "legal-pages",
+    "newsletter-subscription"
+  ],
+  "createdAt": "2025-12-14T04:12:45.149Z",
+  "updatedAt": "2025-12-14T04:12:45.149Z"
+}

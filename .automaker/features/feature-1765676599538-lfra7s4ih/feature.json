@@ -1,0 +1,19 @@
+{
+  "category": "Uncategorized",
+  "description": "add a button to the top header that says lolo. see image for header refernce",
+  "steps": [],
+  "status": "backlog",
+  "images": [],
+  "imagePaths": [
+    {
+      "id": "img-1765676588071-e9ljbm4f9",
+      "path": ".automaker/features/feature-1765676599538-lfra7s4ih/images/Screenshot 2025-12-13 at 8.43.06 PM-1765676588070.png",
+      "filename": "Screenshot 2025-12-13 at 8.43.06 PM.png",
+      "mimeType": "image/png"
+    }
+  ],
+  "skipTests": true,
+  "model": "opus",
+  "thinkingLevel": "none",
+  "id": "feature-1765676599538-lfra7s4ih"
+}

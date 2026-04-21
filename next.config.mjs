@@ -15,6 +15,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "icongeneratorai.com",
       },
+      {
+        protocol: "https",
+        hostname: "agenticjumpstart.com",
+      },
+      {
+        protocol: "https",
+        hostname: "aiclipstudio.com",
+      },
     ],
   },
 };

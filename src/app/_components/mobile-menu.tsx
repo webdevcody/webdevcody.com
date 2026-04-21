@@ -11,8 +11,8 @@ export default function MobileMenu() {
 
   const navigation = [
     { name: "Home", href: "/" },
+    { name: "Products", href: "/products" },
     { name: "Courses", href: "/courses" },
-    { name: "My Products", href: "/products" },
     { name: "Contact", href: "/contact" },
     {
       name: "Submit Video Suggestion",

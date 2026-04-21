@@ -1,84 +1,101 @@
+"use client";
+
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowRight, Play } from "lucide-react";
+import { Avatar } from "@/components/avatar";
+import { SocialStrip } from "@/components/social-strip";
+import { profile } from "@/data/profile";
 
 export default function HeroSection() {
   return (
-    <div className="relative min-h-[calc(100vh-6rem)] flex items-center py-20 px-4 overflow-hidden">
-      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] dark:opacity-20 opacity-10" />
+    <section className="relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 grid-backdrop opacity-60" />
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-accent/10 blur-[120px]" />
 
-      <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
+      <div className="relative container mx-auto px-6 py-20 sm:py-28 lg:py-32">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col gap-6"
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="flex flex-col gap-8"
           >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
-              Are you looking to become a{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
-                web developer
+            <div className="flex items-center gap-3">
+              <span className="eyebrow">
+                {profile.roles.join(" · ")}
               </span>
-              ?
-            </h1>
+            </div>
 
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed">
-              You&apos;re at the{" "}
-              <strong className="text-gray-900 dark:text-white">
-                right place
-              </strong>
-              . This is my personal website where you can find information
-              related to my{" "}
-              <strong className="text-gray-900 dark:text-white">
-                youtube channel
-              </strong>
-              ,{" "}
-              <strong className="text-gray-900 dark:text-white">
-                my courses
-              </strong>
-              , and my various{" "}
-              <strong className="text-gray-900 dark:text-white">
-                products
-              </strong>
-              .
-            </p>
+            <div className="flex flex-col gap-6">
+              <h1 className="text-balance">
+                Hi, I&apos;m{" "}
+                <span className="text-accent">
+                  {profile.name.split(" ")[0]}
+                </span>
+                .
+              </h1>
+              <p className="max-w-xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
+                {profile.tagline}
+              </p>
+            </div>
 
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed">
-              Feel free to{" "}
+            <div className="flex flex-wrap items-center gap-3">
               <Link
-                className="relative inline-block text-blue-600 dark:text-blue-400 font-semibold hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-200 after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-purple-600 dark:after:bg-purple-400 after:bottom-0 after:left-0 after:origin-right after:scale-x-0 hover:after:scale-x-100 after:transition-transform"
-                href="/contact"
+                href={profile.social.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground transition-all hover:bg-accent/90"
               >
-                send me a message
-              </Link>{" "}
-              if you want to contact me directly about needing a{" "}
-              <strong className="text-gray-900 dark:text-white">
-                sponsored video
-              </strong>{" "}
-              or subscribe to my awesome newsletter.
-            </p>
+                <Play className="h-4 w-4 fill-current" aria-hidden="true" />
+                Watch on YouTube
+              </Link>
+              <Link
+                href="/products"
+                className="group inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-medium text-foreground transition-all hover:border-accent/60 hover:text-accent"
+              >
+                See my work
+                <ArrowRight
+                  className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                  aria-hidden="true"
+                />
+              </Link>
+            </div>
+
+            <SocialStrip className="pt-2" />
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative"
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+            className="flex flex-col items-center gap-6 lg:items-end"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 dark:from-blue-500/30 dark:to-purple-500/30 rounded-2xl blur-xl transform -rotate-2" />
-            <div className="relative bg-white dark:bg-slate-900 p-2 rounded-2xl shadow-xl dark:shadow-2xl ring-1 ring-black/5 dark:ring-white/10">
-              <iframe
-                className="w-full aspect-video rounded-lg"
-                src="https://www.youtube.com/embed/-lNpF0ACe1Y?si=nUyS2-DCZCw2qj1Z"
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              />
+            <Avatar
+              src={profile.avatar}
+              alt={`${profile.name} portrait`}
+              size={320}
+              className="shadow-2xl shadow-black/40"
+            />
+
+            <div className="grid w-full max-w-sm grid-cols-3 gap-3">
+              {profile.stats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="flex flex-col gap-1 rounded-xl border border-border bg-card px-3 py-3 text-center"
+                >
+                  <span className="font-serif text-2xl leading-none text-foreground">
+                    {stat.value}
+                  </span>
+                  <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
             </div>
           </motion.div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

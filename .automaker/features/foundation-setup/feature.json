@@ -1,0 +1,11 @@
+{
+  "id": "foundation-setup",
+  "title": "Foundation & Core Setup",
+  "description": "Set up Next.js 14 project with TypeScript, TailwindCSS, and essential dependencies. Establish project structure, configuration files, and basic routing with App Router.",
+  "status": "backlog",
+  "priority": 1,
+  "complexity": "moderate",
+  "dependencies": [],
+  "createdAt": "2025-12-14T04:12:45.141Z",
+  "updatedAt": "2025-12-14T04:12:45.141Z"
+}

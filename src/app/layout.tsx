@@ -4,24 +4,48 @@ import { Providers } from "./providers";
 import Header from "./_components/header";
 import { Footer } from "./_components/footer";
 import { SendEventOnLoad } from "@/components/send-event-on-load";
-import { Inter as FontSans } from "next/font/google";
+import { Inter, Fraunces } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
-import MobileMenu from "./_components/mobile-menu";
-import Link from "next/link";
-import Script from "next/script";
 
-const fontSans = FontSans({
+const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
+});
+
+const fontSerif = Fraunces({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-serif",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "WebDevCody.com",
-  description: "My personal website for my youtube channel",
+  title: {
+    default: "Cody Seibert — Software engineer, creator, founder",
+    template: "%s — Cody Seibert",
+  },
+  description:
+    "I'm Cody Seibert. I build SaaS products, teach web development on YouTube, and publish courses that help developers level up faster.",
+  metadataBase: new URL("https://webdevcody.com"),
   icons: [
     { rel: "icon", type: "image/png", sizes: "16x16", url: "/favicon.ico" },
   ],
+  openGraph: {
+    title: "Cody Seibert — Software engineer, creator, founder",
+    description:
+      "Software engineer building SaaS products, teaching on YouTube, and shipping courses for developers.",
+    url: "https://webdevcody.com",
+    siteName: "Web Dev Cody",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cody Seibert — Software engineer, creator, founder",
+    description:
+      "Software engineer building SaaS products, teaching on YouTube, and shipping courses for developers.",
+  },
 };
 
 export default function RootLayout({
@@ -31,21 +55,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      {/* <Script
-        id="sensei-script"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.sherpa = {
-              siteId: 'kn71crk59a0zv8epkwygcc9ay57ect8j'
-            }
-          `,
-        }}
-      />
-      <Script src="https://thesitesherpa.com/widget.js"></Script> */}
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
+          fontSans.variable,
+          fontSerif.variable
         )}
       >
         <Providers>

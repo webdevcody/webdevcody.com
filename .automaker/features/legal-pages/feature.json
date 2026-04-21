@@ -1,0 +1,13 @@
+{
+  "id": "legal-pages",
+  "title": "Legal Compliance Pages",
+  "description": "Terms of Service, Privacy Policy, and Fulfillment Policy pages for legal compliance. Uses MDX for content management and consistent styling across all legal documents.",
+  "status": "backlog",
+  "priority": 2,
+  "complexity": "simple",
+  "dependencies": [
+    "foundation-setup"
+  ],
+  "createdAt": "2025-12-14T04:12:45.148Z",
+  "updatedAt": "2025-12-14T04:12:45.148Z"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "video-suggestion-form",
+  "title": "Video Suggestion Modal",
+  "description": "Responsive modal/drawer form for video topic suggestions using Radix Dialog (desktop) and Vaul drawer (mobile). Integrates with Project Planner AI API for suggestion tracking.",
+  "status": "backlog",
+  "priority": 1,
+  "complexity": "moderate",
+  "dependencies": [
+    "toast-notifications",
+    "responsive-navigation"
+  ],
+  "createdAt": "2025-12-14T04:12:45.146Z",
+  "updatedAt": "2025-12-14T04:12:45.146Z"
+}

@@ -1,0 +1,355 @@
+<project_specification>
+  <project_name>WebDevCody.com</project_name>
+  
+  <overview>
+    A personal website for YouTuber WebDevCody (Cody) to showcase his web development content, sell courses, promote products/services, and engage with his community. The site serves as a central hub connecting visitors to his YouTube channel, educational courses, side projects, and provides tools for community engagement including newsletter subscription and video suggestion submissions.
+  </overview>
+  
+  <technology_stack>
+    - **Framework**: Next.js 14 (App Router)
+    - **Language**: TypeScript 5
+    - **Styling**: TailwindCSS 3.3 with tailwindcss-animate
+    - **UI Components**: Radix UI (Dialog, Dropdown Menu, Label, Slot, Toast)
+    - **Animation**: Framer Motion 12
+    - **Icons**: Lucide React
+    - **Forms**: React Hook Form with Zod validation (@hookform/resolvers)
+    - **State Management**: TanStack React Query 5
+    - **Content**: next-mdx-remote for MDX support
+    - **Theming**: next-themes for dark/light mode
+    - **Environment Variables**: @t3-oss/env-nextjs with Zod validation
+    - **Security**: next-recaptcha-v3 for spam protection
+    - **Cloud Services**: AWS SDK (DynamoDB for data storage)
+    - **Image Processing**: Sharp
+    - **Notifications**: Sonner for toast notifications
+    - **Mobile UI**: Vaul for drawer components
+    - **Typography**: @tailwindcss/typography plugin
+    - **Fonts**: Inter (Google Fonts)
+  </technology_stack>
+  
+  <core_capabilities>
+    1. **Landing Page**: Hero section with embedded YouTube video, newsletter signup, video suggestion CTA, and about/skills section
+    2. **Newsletter Subscription**: Email collection with reCAPTCHA protection, integrated with external mailing list service
+    3. **Courses Showcase**: Display paid courses available on Gumroad with descriptions and purchase links
+    4. **Products Portfolio**: Showcase of side projects (Project Planner AI, Icon Generator AI)
+    5. **Contact Hub**: Links to Discord, YouTube, GitHub, and email contact
+    6. **Video Suggestions**: Feedback form for community video topic requests (integrates with Project Planner AI)
+    7. **Dark/Light Mode**: Full theme support with system preference detection
+    8. **Responsive Design**: Mobile-first with dedicated mobile menu and drawer components
+    9. **Legal Pages**: Terms of Service, Privacy Policy, Fulfillment Policy
+    10. **Analytics**: Event tracking via SendEventOnLoad component
+  </core_capabilities>
+  
+  <architecture>
+    ```
+    src/
+    ├── app/                          # Next.js App Router
+    │   ├── (landing)/                # Landing page route group
+    │   │   ├── _compoents/           # Landing-specific components
+    │   │   │   ├── about.tsx         # About section with skills
+    │   │   │   ├── hero-section.tsx  # Hero with YouTube embed
+    │   │   │   ├── newsletter-section.tsx
+    │   │   │   ├── subscribe-form.tsx
+    │   │   │   └── video-suggestion-cta.tsx
+    │   │   ├── actions.ts            # Server actions for subscription
+    │   │   └── page.tsx
+    │   ├── (legal)/                  # Legal pages route group
+    │   │   ├── fulfillment-policy/
+    │   │   ├── privacy-policy/
+    │   │   └── terms-of-service/
+    │   ├── _components/              # Shared app components
+    │   │   ├── feedback-button.tsx
+    │   │   ├── footer.tsx
+    │   │   ├── header.tsx
+    │   │   ├── mobile-menu.tsx
+    │   │   └── mode-toggle.tsx
+    │   ├── contact/
+    │   ├── courses/
+    │   ├── products/
+    │   ├── bye/                      # Unsubscribe page
+    │   ├── layout.tsx                # Root layout
+    │   ├── providers.tsx             # Context providers
+    │   └── globals.css
+    ├── components/                   # Reusable UI components
+    │   ├── ui/                       # Shadcn/ui components
+    │   ├── icons.tsx
+    │   ├── mdx.tsx
+    │   ├── send-event-on-load.tsx
+    │   └── theme-provider.tsx
+    ├── hooks/
+    │   └── use-media-query.tsx
+    ├── lib/
+    │   ├── analytics.ts
+    │   ├── posts.ts
+    │   └── utils.ts
+    ├── services/
+    │   └── captcha.ts                # reCAPTCHA verification
+    ├── use-cases/
+    │   └── subscriptions.ts          # Newsletter subscription logic
+    └── env.ts                        # Environment configuration
+    ```
+    
+    **Architecture Pattern**: Clean Architecture with use-cases layer separating business logic from presentation. Server Actions pattern for form submissions with Server Components by default.
+  </architecture>
+  
+  <data_models>
+    **Subscription (Newsletter)**
+    ```typescript
+    {
+      email: string;
+      token: string; // reCAPTCHA token
+    }
+    ```
+    
+    **Feedback/Video Suggestion**
+    ```typescript
+    {
+      name: string;
+      feedback: string;
+      projectId: string; // Project Planner AI project ID
+    }
+    ```
+    
+    **Course**
+    ```typescript
+    {
+      title: string;
+      href: string;      // Gumroad link
+      description: string;
+      imageUrl: string;
+    }
+    ```
+    
+    **Product**
+    ```typescript
+    {
+      title: string;
+      description: string;
+      image: string;
+      link: string;
+    }
+    ```
+    
+    **Contact Link**
+    ```typescript
+    {
+      title: string;
+      description: string;
+      icon: LucideIcon;
+      href: string;
+      color: string;
+    }
+    ```
+    
+    **Environment Variables**
+    - TABLE_NAME: DynamoDB table name
+    - RECAPTCHA_SECRET: Server-side reCAPTCHA key
+    - MAILING_LIST_ENDPOINT: External mailing list API
+    - MAILING_LIST_PASSWORD: API authentication
+    - NEXT_PUBLIC_RECAPTCHA_SITE_KEY: Client-side reCAPTCHA key
+    - NEXT_PUBLIC_PLANNER_ID: Project Planner AI integration ID
+  </data_models>
+  
+  <api_design>
+    **Server Actions**
+    
+    1. `subscribeAction({ token, email })`
+       - Purpose: Subscribe user to newsletter
+       - Validation: reCAPTCHA verification
+       - Integration: External mailing list API (POST with Bearer auth)
+    
+    **External API Integrations**
+    
+    1. Mailing List Service
+       - Endpoint: `MAILING_LIST_ENDPOINT`
+       - Method: POST
+       - Auth: Bearer token
+       - Body: `email` (form-urlencoded)
+    
+    2. Project Planner AI Feedback
+       - Endpoint: `https://projectplannerai.com/api/feedback`
+       - Method: POST
+       - Body: `{ name, feedback, projectId }`
+    
+    3. Google reCAPTCHA v3
+       - Client: next-recaptcha-v3 provider
+       - Server: Token verification via `verifyRecaptcha()`
+    
+    **External Links (Not APIs)**
+    - YouTube: youtube.com/@webdevcody
+    - GitHub: github.com/webdevcody
+    - Discord: discord.gg/N2uEyp7Rfu
+    - Gumroad: webdevcody.gumroad.com
+    - Video Suggestions: suggestions.webdevcody.com
+  </api_design>
+  
+  <implementation_roadmap>
+    **Phase 1: Foundation (Completed)**
+    - Next.js 14 project setup with App Router
+    - TailwindCSS configuration with custom theme
+    - Dark/light mode theming
+    - Responsive header and footer
+    - Mobile navigation drawer
+    
+    **Phase 2: Core Pages (Completed)**
+    - Landing page with hero section
+    - YouTube video embed integration
+    - About section with skills showcase
+    - Courses listing page
+    - Products showcase page
+    - Contact page with social links
+    
+    **Phase 3: User Engagement (Completed)**
+    - Newsletter subscription with reCAPTCHA
+    - Video suggestion form/modal
+    - Toast notifications
+    - Legal pages (ToS, Privacy, Fulfillment)
+    
+    **Phase 4: Future Enhancements**
+    - Blog/posts with MDX content (infrastructure exists)
+    - YouTube API integration for live video feeds
+    - Course enrollment tracking
+    - Analytics dashboard
+    - Admin panel for content management
+    - Search functionality
+    - Testimonials section
+    - Sponsorship inquiry form
+  </implementation_roadmap>
+</project_specification>
+
+<features>
+  <feature>
+    <id>newsletter-subscription</id>
+    <title>Newsletter Subscription</title>
+    <description>Email subscription form with reCAPTCHA protection that integrates with external mailing list service. Includes client-side validation and toast notifications for success/error states.</description>
+    <priority>1</priority>
+    <complexity>moderate</complexity>
+  </feature>
+  
+  <feature>
+    <id>video-suggestion-form</id>
+    <title>Video Suggestion Form</title>
+    <description>Modal/drawer form allowing visitors to submit video topic suggestions. Uses responsive design (dialog on desktop, drawer on mobile) and integrates with Project Planner AI for suggestion tracking.</description>
+    <priority>1</priority>
+    <complexity>moderate</complexity>
+  </feature>
+  
+  <feature>
+    <id>courses-showcase</id>
+    <title>Courses Showcase</title>
+    <description>Page displaying available paid courses with images, descriptions, and links to Gumroad purchase pages. Features animated cards with Framer Motion.</description>
+    <priority>1</priority>
+    <complexity>simple</complexity>
+  </feature>
+  
+  <feature>
+    <id>products-portfolio</id>
+    <title>Products Portfolio</title>
+    <description>Showcase page for side projects and SaaS products with product cards, descriptions, and external links.</description>
+    <priority>1</priority>
+    <complexity>simple</complexity>
+  </feature>
+  
+  <feature>
+    <id>dark-light-theme</id>
+    <title>Dark/Light Theme Toggle</title>
+    <description>Full dark and light mode support with system preference detection, persistent user preference, and seamless transitions across all components.</description>
+    <priority>1</priority>
+    <complexity>moderate</complexity>
+  </feature>
+  
+  <feature>
+    <id>responsive-navigation</id>
+    <title>Responsive Navigation</title>
+    <description>Sticky header with desktop navigation links and mobile hamburger menu with drawer component. Includes social media links and theme toggle.</description>
+    <priority>1</priority>
+    <complexity>moderate</complexity>
+  </feature>
+  
+  <feature>
+    <id>hero-section-youtube</id>
+    <title>Hero Section with YouTube Embed</title>
+    <description>Landing page hero with compelling headline, description text, and embedded YouTube video player. Features animated content with Framer Motion.</description>
+    <priority>1</priority>
+    <complexity>simple</complexity>
+  </feature>
+  
+  <feature>
+    <id>contact-hub</id>
+    <title>Contact Hub Page</title>
+    <description>Dedicated contact page with animated cards linking to Discord, YouTube, GitHub, and email. Includes integrated video suggestion button.</description>
+    <priority>2</priority>
+    <complexity>simple</complexity>
+  </feature>
+  
+  <feature>
+    <id>about-skills-section</id>
+    <title>About & Skills Section</title>
+    <description>Section displaying creator bio and categorized skills grid (Frontend, Backend, Practices, Business) with animated cards.</description>
+    <priority>2</priority>
+    <complexity>simple</complexity>
+  </feature>
+  
+  <feature>
+    <id>legal-pages</id>
+    <title>Legal Pages</title>
+    <description>Terms of Service, Privacy Policy, and Fulfillment Policy pages for compliance and legal requirements.</description>
+    <priority>2</priority>
+    <complexity>simple</complexity>
+  </feature>
+  
+  <feature>
+    <id>recaptcha-protection</id>
+    <title>reCAPTCHA v3 Protection</title>
+    <description>Google reCAPTCHA v3 integration for form spam protection with invisible badge and server-side verification.</description>
+    <priority>1</priority>
+    <complexity>moderate</complexity>
+  </feature>
+  
+  <feature>
+    <id>analytics-tracking</id>
+    <title>Analytics Event Tracking</title>
+    <description>Custom analytics implementation with SendEventOnLoad component for tracking page views and user interactions.</description>
+    <priority>3</priority>
+    <complexity>simple</complexity>
+  </feature>
+  
+  <feature>
+    <id>toast-notifications</id>
+    <title>Toast Notifications</title>
+    <description>User feedback system using Radix Toast and Sonner for success/error messages on form submissions.</description>
+    <priority>2</priority>
+    <complexity>simple</complexity>
+  </feature>
+  
+  <feature>
+    <id>mdx-blog-support</id>
+    <title>MDX Blog Support</title>
+    <description>Infrastructure for MDX-based blog posts with next-mdx-remote integration. Foundation exists but not fully implemented.</description>
+    <priority>3</priority>
+    <complexity>moderate</complexity>
+  </feature>
+  
+  <feature>
+    <id>youtube-api-integration</id>
+    <title>YouTube API Integration</title>
+    <description>Future feature to dynamically fetch and display latest videos from the YouTube channel instead of hardcoded embeds.</description>
+    <priority>3</priority>
+    <complexity>moderate</complexity>
+  </feature>
+  
+  <feature>
+    <id>admin-content-management</id>
+    <title>Admin Content Management</title>
+    <description>Future admin panel for managing courses, products, and other content without code changes.</description>
+    <priority>3</priority>
+    <complexity>complex</complexity>
+  </feature>
+  
+  <feature>
+    <id>sponsorship-inquiry-form</id>
+    <title>Sponsorship Inquiry Form</title>
+    <description>Dedicated form for brands/companies to submit sponsorship inquiries for video collaborations.</description>
+    <priority>3</priority>
+    <complexity>moderate</complexity>
+  </feature>
+</features>

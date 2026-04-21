@@ -1,0 +1,14 @@
+{
+  "id": "courses-showcase",
+  "title": "Courses Portfolio Page",
+  "description": "Dedicated page displaying available paid courses with images, descriptions, and Gumroad purchase links. Features animated course cards and responsive grid layout.",
+  "status": "backlog",
+  "priority": 1,
+  "complexity": "simple",
+  "dependencies": [
+    "responsive-navigation",
+    "toast-notifications"
+  ],
+  "createdAt": "2025-12-14T04:12:45.147Z",
+  "updatedAt": "2025-12-14T04:12:45.147Z"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "responsive-navigation",
+  "title": "Responsive Header & Navigation",
+  "description": "Create sticky header with desktop navigation links and mobile hamburger menu using Vaul drawer. Includes logo, theme toggle, and social media links with responsive behavior.",
+  "status": "backlog",
+  "priority": 1,
+  "complexity": "moderate",
+  "dependencies": [
+    "dark-light-theme"
+  ],
+  "createdAt": "2025-12-14T04:12:45.143Z",
+  "updatedAt": "2025-12-14T04:12:45.143Z"
+}

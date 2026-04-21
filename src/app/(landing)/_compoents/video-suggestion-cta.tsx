@@ -1,32 +1,28 @@
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { Lightbulb, ArrowRight } from "lucide-react";
 
 export default function VideoSuggestionCTA() {
   return (
-    <section className="mb-16 py-16 px-4 border-t border-b border-dashed">
-      <div className="container mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center"
+    <section className="pb-16 pt-4">
+      <div className="container mx-auto px-6">
+        <Link
+          href="https://suggestions.webdevcody.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group mx-auto flex w-fit items-center gap-3 rounded-full border border-border bg-card/60 px-5 py-2.5 text-sm text-muted-foreground transition-all hover:border-accent/60 hover:text-foreground"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Have a Video Idea?
-          </h2>
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-            I&apos;m always looking for new content ideas! If you have a
-            suggestion for a video topic, tutorial, or project you&apos;d like
-            to see covered, let me know.
-          </p>
-          <Link
-            href="https://suggestions.webdevcody.com"
-            className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
-          >
-            Submit Video Suggestion
-          </Link>
-        </motion.div>
+          <Lightbulb className="h-4 w-4 text-accent" aria-hidden="true" />
+          <span>
+            Have a video idea?{" "}
+            <span className="text-foreground group-hover:text-accent">
+              Submit a suggestion
+            </span>
+          </span>
+          <ArrowRight
+            className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+            aria-hidden="true"
+          />
+        </Link>
       </div>
     </section>
   );
