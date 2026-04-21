@@ -52,7 +52,7 @@ export function CourseCard({
                 </span>
               ) : null}
             </div>
-            <h3 className="font-serif text-3xl font-normal leading-tight tracking-tight text-foreground sm:text-4xl">
+            <h3 className="font-heading text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">
               {course.title}
             </h3>
             <p className="text-base leading-relaxed text-muted-foreground">
@@ -79,7 +79,7 @@ export function CourseCard({
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-accent/30 via-accent/10 to-transparent">
-              <span className="font-serif text-7xl text-accent/80">
+              <span className="font-heading text-7xl font-semibold tracking-tight text-accent/80">
                 {initial}
               </span>
             </div>
@@ -112,7 +112,7 @@ export function CourseCard({
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-accent/30 via-accent/10 to-transparent">
-            <span className="font-serif text-5xl text-accent/80">
+            <span className="font-heading text-5xl font-semibold tracking-tight text-accent/80">
               {initial}
             </span>
           </div>

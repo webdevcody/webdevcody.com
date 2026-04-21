@@ -1,6 +1,7 @@
 import { GithubIcon, YoutubeIcon } from "@/components/icons";
 import Image from "next/image";
 import Link from "next/link";
+import { profile } from "@/data/profile";
 import { ModeToggle } from "./mode-toggle";
 import { MessageCircleHeart } from "lucide-react";
 import FeedbackButton from "./feedback-button";
@@ -30,7 +31,7 @@ export default function Header() {
             />
           </div>
           <span className="font-semibold text-foreground">
-            Cody Seibert
+            {profile.siteTitle}
           </span>
         </Link>
 

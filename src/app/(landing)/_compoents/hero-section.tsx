@@ -84,7 +84,7 @@ export default function HeroSection() {
                   key={stat.label}
                   className="flex flex-col gap-1 rounded-xl border border-border bg-card px-3 py-3 text-center"
                 >
-                  <span className="font-serif text-2xl leading-none text-foreground">
+                  <span className="font-heading text-2xl font-semibold leading-none tracking-tight text-foreground">
                     {stat.value}
                   </span>
                   <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">

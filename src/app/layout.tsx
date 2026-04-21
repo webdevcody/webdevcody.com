@@ -4,27 +4,24 @@ import { Providers } from "./providers";
 import Header from "./_components/header";
 import { Footer } from "./_components/footer";
 import { SendEventOnLoad } from "@/components/send-event-on-load";
-import { Inter, Fraunces } from "next/font/google";
+import { Oxanium } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
+import { profile } from "@/data/profile";
 
-const fontSans = Inter({
+const fontSans = Oxanium({
   subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
   variable: "--font-sans",
-  display: "swap",
-});
-
-const fontSerif = Fraunces({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-serif",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "Cody Seibert — Software engineer, creator, founder",
-    template: "%s — Cody Seibert",
+    default: `${profile.siteTitle} — Software engineer, creator, founder`,
+    template: `%s — ${profile.siteTitle}`,
   },
   description:
     "I'm Cody Seibert. I build SaaS products, teach web development on YouTube, and publish courses that help developers level up faster.",
@@ -33,16 +30,16 @@ export const metadata: Metadata = {
     { rel: "icon", type: "image/png", sizes: "16x16", url: "/favicon.ico" },
   ],
   openGraph: {
-    title: "Cody Seibert — Software engineer, creator, founder",
+    title: `${profile.siteTitle} — Software engineer, creator, founder`,
     description:
       "Software engineer building SaaS products, teaching on YouTube, and shipping courses for developers.",
     url: "https://webdevcody.com",
-    siteName: "Web Dev Cody",
+    siteName: profile.siteTitle,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cody Seibert — Software engineer, creator, founder",
+    title: `${profile.siteTitle} — Software engineer, creator, founder`,
     description:
       "Software engineer building SaaS products, teaching on YouTube, and shipping courses for developers.",
   },
@@ -59,7 +56,8 @@ export default function RootLayout({
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable,
-          fontSerif.variable
+          GeistSans.variable,
+          GeistMono.variable
         )}
       >
         <Providers>

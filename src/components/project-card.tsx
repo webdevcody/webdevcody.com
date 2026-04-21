@@ -49,7 +49,7 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
         ) : (
           <div className="relative flex h-full w-full items-center justify-center bg-gradient-to-br from-accent/30 via-accent/10 to-transparent">
             <div className="absolute inset-0 dot-backdrop opacity-50" />
-            <span className="relative font-serif text-7xl text-accent/80">
+            <span className="relative font-heading text-7xl font-semibold tracking-tight text-accent/80">
               {initial}
             </span>
           </div>

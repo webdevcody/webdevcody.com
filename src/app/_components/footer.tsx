@@ -23,7 +23,7 @@ export function Footer() {
                 />
               </div>
               <span className="font-semibold text-foreground">
-                {profile.name}
+                {profile.siteTitle}
               </span>
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">

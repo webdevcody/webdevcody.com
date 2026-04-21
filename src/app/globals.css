@@ -95,21 +95,23 @@
   h4,
   h5,
   h6 {
-    @apply text-foreground tracking-tight;
+    @apply font-heading text-foreground tracking-tight;
   }
   h1 {
-    @apply font-serif text-5xl sm:text-6xl lg:text-7xl font-normal;
-    letter-spacing: -0.02em;
+    @apply text-5xl sm:text-6xl lg:text-7xl font-semibold;
+    letter-spacing: -0.035em;
   }
   h2 {
-    @apply font-serif text-3xl sm:text-4xl lg:text-5xl font-normal;
-    letter-spacing: -0.01em;
+    @apply text-3xl sm:text-4xl lg:text-5xl font-semibold;
+    letter-spacing: -0.025em;
   }
   h3 {
-    @apply font-sans text-xl sm:text-2xl font-semibold;
+    @apply text-xl sm:text-2xl font-semibold;
+    letter-spacing: -0.015em;
   }
   h4 {
-    @apply font-sans text-lg font-semibold;
+    @apply text-lg font-semibold;
+    letter-spacing: -0.01em;
   }
   a {
     @apply transition-colors duration-200;

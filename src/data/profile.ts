@@ -1,4 +1,5 @@
 export const profile = {
+  siteTitle: "webdevcody",
   name: "Cody Seibert",
   handle: "Web Dev Cody",
   roles: ["Software engineer", "Creator", "Founder"],
