@@ -10,11 +10,11 @@ export default function Home() {
   return (
     <main className="flex flex-col">
       <HeroSection />
+      <NewsletterSection />
       <FeaturedProducts />
       <FeaturedCourses />
       <LatestVideo />
       <AboutSection />
-      <NewsletterSection />
       <VideoSuggestionCTA />
     </main>
   );
