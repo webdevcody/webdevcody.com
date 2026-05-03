@@ -1,7 +1,7 @@
 import { env } from "@/env";
 
 export async function sendEvent(key: string) {
-  if (env.NEXT_PUBLIC_IS_LOCAL) return;
+  if (env.VITE_IS_LOCAL) return;
   await fetch("https://projectplannerai.com/api/events", {
     method: "POST",
     headers: {
@@ -9,7 +9,7 @@ export async function sendEvent(key: string) {
     },
     body: JSON.stringify({
       key,
-      projectId: env.NEXT_PUBLIC_PLANNER_ID,
+      projectId: env.VITE_PLANNER_ID,
     }),
   });
 }

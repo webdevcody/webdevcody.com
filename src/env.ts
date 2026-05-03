@@ -1,25 +1,24 @@
-import { createEnv } from "@t3-oss/env-nextjs";
+import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
+
+const isServer = typeof window === "undefined";
 
 export const env = createEnv({
   server: {
-    TABLE_NAME: z.string().min(1),
-    RECAPTCHA_SECRET: z.string().min(1),
-    MAILING_LIST_ENDPOINT: z.string().min(1),
-    MAILING_LIST_PASSWORD: z.string().min(1),
+    RECAPTCHA_SECRET: z.string().min(1).optional(),
+    MAILING_LIST_ENDPOINT: z.string().min(1).optional(),
+    MAILING_LIST_PASSWORD: z.string().min(1).optional(),
+    TABLE_NAME: z.string().min(1).optional(),
   },
+  clientPrefix: "VITE_",
   client: {
-    NEXT_PUBLIC_RECAPTCHA_SITE_KEY: z.string().min(1),
-    NEXT_PUBLIC_PLANNER_ID: z.string().min(1),
-    NEXT_PUBLIC_IS_LOCAL: z.string().optional(),
+    VITE_RECAPTCHA_SITE_KEY: z.string().min(1).optional(),
+    VITE_PLANNER_ID: z.string().min(1).optional(),
+    VITE_IS_LOCAL: z.string().optional(),
   },
-  runtimeEnv: {
-    MAILING_LIST_PASSWORD: process.env.MAILING_LIST_PASSWORD,
-    MAILING_LIST_ENDPOINT: process.env.MAILING_LIST_ENDPOINT,
-    RECAPTCHA_SECRET: process.env.RECAPTCHA_SECRET,
-    TABLE_NAME: process.env.TABLE_NAME,
-    NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
-    NEXT_PUBLIC_PLANNER_ID: process.env.NEXT_PUBLIC_PLANNER_ID,
-    NEXT_PUBLIC_IS_LOCAL: process.env.NEXT_PUBLIC_IS_LOCAL,
-  },
+  runtimeEnv: isServer
+    ? (process.env as Record<string, string | undefined>)
+    : (import.meta.env as unknown as Record<string, string | undefined>),
+  emptyStringAsUndefined: true,
+  skipValidation: true,
 });

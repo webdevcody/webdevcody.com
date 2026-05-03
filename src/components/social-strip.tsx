@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/link";
 import { GithubIcon, XIcon, YoutubeIcon } from "@/components/icons";
 import { cn } from "@/lib/utils";
 
