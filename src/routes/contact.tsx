@@ -1,13 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import {
-  MessageCircleHeart,
-  Mail,
-  Github,
-  Youtube,
-  ArrowUpRight,
-} from "lucide-react";
-import FeedbackButton from "@/components/site/feedback-button";
+import { Mail, Github, Youtube, ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 import { profile } from "@/data/profile";
 
@@ -93,17 +86,6 @@ function ContactPage() {
           })}
         </div>
 
-        <div className="mt-12 flex justify-center">
-          <FeedbackButton
-            triggerContent={
-              <button className="group inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-medium text-foreground transition-all hover:border-accent/60 hover:text-accent">
-                <MessageCircleHeart className="h-4 w-4" />
-                <span>Leave a video suggestion</span>
-                <ArrowUpRight className="h-4 w-4 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </button>
-            }
-          />
-        </div>
       </div>
     </div>
   );

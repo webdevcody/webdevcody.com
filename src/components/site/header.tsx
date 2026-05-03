@@ -5,8 +5,6 @@ import { profile } from "@/data/profile";
 import { products } from "@/data/products";
 import { courses } from "@/data/courses";
 import { ModeToggle } from "@/components/site/mode-toggle";
-import { MessageCircleHeart } from "lucide-react";
-import FeedbackButton from "@/components/site/feedback-button";
 import MobileMenu from "@/components/site/mobile-menu";
 import { NavDropdown, type NavDropdownItem } from "@/components/site/nav-dropdown";
 
@@ -71,17 +69,6 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-1.5">
-          <FeedbackButton
-            triggerContent={
-              <button
-                title="Leave Suggestion"
-                className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-              >
-                <MessageCircleHeart size={18} />
-              </button>
-            }
-          />
-
           <Link
             href="https://youtube.com/@webdevcody"
             target="_blank"

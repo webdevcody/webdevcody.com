@@ -3,7 +3,6 @@
 import { useReCaptcha } from "@/lib/recaptcha";
 import { useTransition } from "react";
 import { subscribeAction } from "@/server/subscribe";
-import { sendEvent } from "@/lib/analytics";
 import { useToast } from "@/components/ui/use-toast";
 
 export function SubscribeForm() {
@@ -24,7 +23,6 @@ export function SubscribeForm() {
           subscribeAction({ data: {
             email: email as string, token },
           }).then(() => {
-            sendEvent("user subscribed");
             form.reset();
             toast({
               title: "Subscribed!",

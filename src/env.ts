@@ -13,7 +13,6 @@ export const env = createEnv({
   clientPrefix: "VITE_",
   client: {
     VITE_RECAPTCHA_SITE_KEY: z.string().min(1).optional(),
-    VITE_PLANNER_ID: z.string().min(1).optional(),
     VITE_IS_LOCAL: z.string().optional(),
   },
   runtimeEnv: isServer
