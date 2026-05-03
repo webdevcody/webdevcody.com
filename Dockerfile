@@ -27,8 +27,7 @@ ENV NODE_ENV=production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nodejs-user
 
-COPY --from=builder --chown=nodejs-user:nodejs /app/dist ./dist
-COPY --from=builder --chown=nodejs-user:nodejs /app/public ./public
+COPY --from=builder --chown=nodejs-user:nodejs /app/.output ./.output
 
 USER nodejs-user
 
@@ -36,4 +35,4 @@ EXPOSE 3000
 
 ENV PORT=3000
 
-CMD ["node", "dist/server/server.js"]
+CMD ["node", ".output/server/index.mjs"]
