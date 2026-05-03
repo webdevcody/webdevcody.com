@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Mail, Github, Youtube, ArrowUpRight } from "lucide-react";
+import { Mail, MessageCircleHeart, ArrowUpRight } from "lucide-react";
+import { GithubIcon, YoutubeIcon } from "@/components/icons";
 import { SectionHeading } from "@/components/section-heading";
 import { profile } from "@/data/profile";
 
@@ -22,14 +23,14 @@ function ContactPage() {
       title: "YouTube Channel",
       description:
         "Subscribe for weekly web-development tutorials, project walkthroughs, and deep dives.",
-      icon: Youtube,
+      icon: YoutubeIcon,
       href: profile.social.youtube,
     },
     {
       title: "GitHub",
       description:
         "Check out my open-source projects, examples, and experiments.",
-      icon: Github,
+      icon: GithubIcon,
       href: profile.social.github,
     },
     {

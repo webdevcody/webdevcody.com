@@ -1,0 +1,37 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -z \"$MC_TASK_ID\" ] || [ -z \"$MC_API_URL\" ]; then exit 0; fi; curl -sS -m 3 -X POST -H \"Authorization: Bearer $MC_API_TOKEN\" -H \"Content-Type: application/json\" --data-binary @- \"$MC_API_URL/api/hooks/codex?taskId=$MC_TASK_ID\" >/dev/null 2>&1 || true"
+          }
+        ],
+        "_mcManaged": true
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -z \"$MC_TASK_ID\" ] || [ -z \"$MC_API_URL\" ]; then exit 0; fi; curl -sS -m 3 -X POST -H \"Authorization: Bearer $MC_API_TOKEN\" -H \"Content-Type: application/json\" --data-binary @- \"$MC_API_URL/api/hooks/codex?taskId=$MC_TASK_ID\" >/dev/null 2>&1 || true"
+          }
+        ],
+        "_mcManaged": true
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -z \"$MC_TASK_ID\" ] || [ -z \"$MC_API_URL\" ]; then exit 0; fi; curl -sS -m 3 -X POST -H \"Authorization: Bearer $MC_API_TOKEN\" -H \"Content-Type: application/json\" --data-binary @- \"$MC_API_URL/api/hooks/codex?taskId=$MC_TASK_ID\" >/dev/null 2>&1 || true"
+          }
+        ],
+        "_mcManaged": true
+      }
+    ]
+  }
+}
