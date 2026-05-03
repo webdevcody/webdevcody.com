@@ -9,13 +9,13 @@ declare global {
   }
 }
 
-const ReCaptchaContext = createContext<{ siteKey: string } | null>(null);
+const ReCaptchaContext = createContext<{ siteKey?: string } | null>(null);
 
 export function ReCaptchaProvider({
   reCaptchaKey,
   children,
 }: {
-  reCaptchaKey: string;
+  reCaptchaKey?: string;
   children: ReactNode;
 }) {
   const loaded = useRef(false);
@@ -46,6 +46,9 @@ export function useReCaptcha() {
   const executeRecaptcha = async (action: string): Promise<string> => {
     if (!ctx) throw new Error("ReCaptchaProvider missing");
     const { siteKey } = ctx;
+    if (!siteKey) {
+      throw new Error("recaptcha site key is not configured");
+    }
     return new Promise((resolve, reject) => {
       const tryExec = (attempt = 0) => {
         if (typeof window === "undefined") return reject("no window");
@@ -61,5 +64,5 @@ export function useReCaptcha() {
       tryExec();
     });
   };
-  return { executeRecaptcha };
+  return { executeRecaptcha, isConfigured: Boolean(ctx?.siteKey) };
 }

@@ -7,7 +7,7 @@ import { useToast } from "@/components/ui/use-toast";
 
 export function SubscribeForm() {
   const [isPending, startTransition] = useTransition();
-  const { executeRecaptcha } = useReCaptcha();
+  const { executeRecaptcha, isConfigured } = useReCaptcha();
   const { toast } = useToast();
 
   return (
@@ -17,8 +17,22 @@ export function SubscribeForm() {
         e.preventDefault();
         const form = e.target as HTMLFormElement;
         const formData = new FormData(form);
-        const token = await executeRecaptcha("form_submit");
         const email = formData.get("email");
+        let token: string | undefined;
+
+        try {
+          token = isConfigured
+            ? await executeRecaptcha("form_submit")
+            : undefined;
+        } catch {
+          toast({
+            title: "Could not verify submission",
+            description: "Please refresh the page and try again.",
+            variant: "destructive",
+          });
+          return;
+        }
+
         startTransition(() => {
           subscribeAction({ data: {
             email: email as string, token },
@@ -28,6 +42,12 @@ export function SubscribeForm() {
               title: "Subscribed!",
               description: "You are now subscribed to the newsletter.",
               variant: "success",
+            });
+          }).catch(() => {
+            toast({
+              title: "Could not subscribe",
+              description: "Please refresh the page and try again.",
+              variant: "destructive",
             });
           });
         });

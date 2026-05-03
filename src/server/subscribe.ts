@@ -4,7 +4,7 @@ import { env } from "@/env";
 import { verifyRecaptcha } from "@/services/captcha";
 
 const InputSchema = z.object({
-  token: z.string().min(1),
+  token: z.string().min(1).optional(),
   email: z.string().email(),
 });
 
@@ -12,6 +12,9 @@ export const subscribeAction = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => InputSchema.parse(d))
   .handler(async ({ data }) => {
     if (env.RECAPTCHA_SECRET) {
+      if (!data.token) {
+        throw new Error("recaptcha token missing");
+      }
       await verifyRecaptcha(data.token, env.RECAPTCHA_SECRET);
     }
     if (env.MAILING_LIST_ENDPOINT && env.MAILING_LIST_PASSWORD) {
