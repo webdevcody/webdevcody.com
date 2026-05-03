@@ -9,12 +9,17 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
-
-# production
+# build output
+/dist
+/.output
+/.nitro
+/.tanstack
 /build
+/out
+
+# vite
+vite.config.timestamp_*
+app.config.timestamp_*
 
 # misc
 .DS_Store
@@ -26,6 +31,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
 .env*.local
 
 # vercel
@@ -33,9 +39,3 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
-
-.env
-
-.open-next
-.sst
