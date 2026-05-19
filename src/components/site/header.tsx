@@ -48,6 +48,12 @@ export default function Header() {
           >
             Home
           </Link>
+          <Link
+            href="/about"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            About
+          </Link>
           <NavDropdown
             label="Products"
             items={productItems}

@@ -21,6 +21,7 @@ export default function MobileMenu() {
 
   const navigation: NavGroup[] = [
     { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
     {
       name: "Products",
       href: "/products",

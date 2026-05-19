@@ -14,6 +14,7 @@ import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as FulfillmentPolicyRouteImport } from './routes/fulfillment-policy'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ByeRouteImport } from './routes/bye'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as CoursesIndexRouteImport } from './routes/courses.index'
@@ -45,6 +46,11 @@ const ByeRoute = ByeRouteImport.update({
   path: '/bye',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -73,6 +79,7 @@ const CoursesSlugRoute = CoursesSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/bye': typeof ByeRoute
   '/contact': typeof ContactRoute
   '/fulfillment-policy': typeof FulfillmentPolicyRoute
@@ -85,6 +92,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/bye': typeof ByeRoute
   '/contact': typeof ContactRoute
   '/fulfillment-policy': typeof FulfillmentPolicyRoute
@@ -98,6 +106,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/bye': typeof ByeRoute
   '/contact': typeof ContactRoute
   '/fulfillment-policy': typeof FulfillmentPolicyRoute
@@ -112,6 +121,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/bye'
     | '/contact'
     | '/fulfillment-policy'
@@ -124,6 +134,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/bye'
     | '/contact'
     | '/fulfillment-policy'
@@ -136,6 +147,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/bye'
     | '/contact'
     | '/fulfillment-policy'
@@ -149,6 +161,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   ByeRoute: typeof ByeRoute
   ContactRoute: typeof ContactRoute
   FulfillmentPolicyRoute: typeof FulfillmentPolicyRoute
@@ -197,6 +210,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ByeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -237,6 +257,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   ByeRoute: ByeRoute,
   ContactRoute: ContactRoute,
   FulfillmentPolicyRoute: FulfillmentPolicyRoute,
