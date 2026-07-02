@@ -9,7 +9,7 @@ const InputSchema = z.object({
 });
 
 export const subscribeAction = createServerFn({ method: "POST" })
-  .inputValidator((d: unknown) => InputSchema.parse(d))
+  .validator((d: unknown) => InputSchema.parse(d))
   .handler(async ({ data }) => {
     if (env.RECAPTCHA_SECRET) {
       if (!data.token) {

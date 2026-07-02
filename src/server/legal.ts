@@ -10,7 +10,7 @@ function parseFrontmatter(fileContent: string) {
 }
 
 export const getLegalDoc = createServerFn({ method: "GET" })
-  .inputValidator((slug: unknown) => z.string().regex(/^[a-z0-9-]+$/).parse(slug))
+  .validator((slug: unknown) => z.string().regex(/^[a-z0-9-]+$/).parse(slug))
   .handler(async ({ data }): Promise<{ content: string } | null> => {
     const file = path.join(process.cwd(), "src/content/legal", `${data}.mdx`);
     if (!fs.existsSync(file)) return null;
