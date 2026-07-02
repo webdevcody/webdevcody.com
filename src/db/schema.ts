@@ -188,6 +188,10 @@ export const sponsorships = pgTable(
       .default(false),
     canceledAt: timestamp("canceled_at", { withTimezone: true }),
     checkoutExpiresAt: timestamp("checkout_expires_at", { withTimezone: true }),
+    sponsorAgreementVersion: text("sponsor_agreement_version"),
+    sponsorAgreementAcceptedAt: timestamp("sponsor_agreement_accepted_at", {
+      withTimezone: true,
+    }),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()
       .defaultNow(),

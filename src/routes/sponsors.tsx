@@ -1,8 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { CheckCircle2, ExternalLink, RadioTower } from "lucide-react";
 import { YoutubeIcon } from "@/components/icons";
 import { SponsorCheckoutButton } from "@/components/sponsors/sponsor-checkout-button";
 import Link from "@/components/link";
+import {
+  SPONSOR_AGREEMENT_CHECKBOX_LABEL,
+  SPONSOR_AGREEMENT_TERMS,
+  SPONSOR_AGREEMENT_VERSION,
+} from "@/lib/sponsors/agreement";
 import {
   formatSponsorPrice,
   getSlotDimensions,
@@ -21,8 +27,7 @@ export const Route = createFileRoute("/sponsors")({
       { title: "Sponsors - webdevcody" },
       {
         name: "description",
-        content:
-          "Monthly YouTube sponsorship slots across Agentic Jumpstart and webdevcody.",
+        content: "Monthly YouTube sponsorship slots for webdevcody.",
       },
     ],
   }),
@@ -31,8 +36,13 @@ export const Route = createFileRoute("/sponsors")({
 
 function SponsorsPage() {
   const { slots } = Route.useLoaderData();
+  const [isSponsorAgreementAccepted, setIsSponsorAgreementAccepted] =
+    useState(false);
   const mainSlot = slots.find((slot) => slot.id === "main");
   const secondarySlots = slots.filter((slot) => slot.id !== "main");
+  const hasAvailableSlots = slots.some(
+    (slot) => slot.availability === "available"
+  );
 
   return (
     <div className="container mx-auto px-6 py-16 sm:py-24">
@@ -41,10 +51,10 @@ function SponsorsPage() {
           <div className="max-w-3xl">
             <span className="eyebrow">Monthly sponsor slots</span>
             <h1 className="mt-4 text-balance text-4xl sm:text-6xl">
-              Sponsor both YouTube channels
+              Sponsor webdevcody
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Your company is featured across Agentic Jumpstart and webdevcody.
+              Your company is featured on the webdevcody YouTube channel.
               Sponsor mentions run roughly 30 seconds near the start of videos,
               with your company name and link in descriptions and pinned
               comments.
@@ -60,7 +70,7 @@ function SponsorsPage() {
 
         <div className="mt-10 grid gap-3 rounded-lg border border-border bg-card p-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            "Both Agentic Jumpstart and webdevcody",
+            "webdevcody YouTube placement",
             "Video description link and company name",
             "Pinned comment placement",
             "Live stream sponsored-by carousel",
@@ -77,12 +87,66 @@ function SponsorsPage() {
           ))}
         </div>
 
+        {hasAvailableSlots ? (
+          <section
+            aria-labelledby="sponsor-agreement-title"
+            className="mt-8 rounded-lg border border-border bg-card p-6"
+          >
+            <span className="eyebrow">Sponsor agreement</span>
+            <h2 id="sponsor-agreement-title" className="mt-3 text-2xl">
+              Required before checkout
+            </h2>
+
+            <div className="mt-5 grid gap-4">
+              {SPONSOR_AGREEMENT_TERMS.map((term) => (
+                <div key={term.title} className="grid gap-1">
+                  <h3 className="text-sm font-semibold text-foreground">
+                    {term.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {term.body}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <label className="mt-6 flex items-start gap-3 rounded-md border border-border bg-background p-4">
+              <input
+                type="checkbox"
+                checked={isSponsorAgreementAccepted}
+                onChange={(event) =>
+                  setIsSponsorAgreementAccepted(event.currentTarget.checked)
+                }
+                className="mt-1 h-4 w-4 rounded border-border accent-current"
+              />
+              <span className="grid gap-1">
+                <span className="text-sm font-semibold text-foreground">
+                  {SPONSOR_AGREEMENT_CHECKBOX_LABEL}
+                </span>
+                <span className="text-xs leading-relaxed text-muted-foreground">
+                  Agreement version {SPONSOR_AGREEMENT_VERSION}
+                </span>
+              </span>
+            </label>
+          </section>
+        ) : null}
+
         <div className="mt-12 grid gap-4">
-          {mainSlot ? <SponsorSlotBox slot={mainSlot} featured /> : null}
+          {mainSlot ? (
+            <SponsorSlotBox
+              slot={mainSlot}
+              sponsorAgreementAccepted={isSponsorAgreementAccepted}
+              featured
+            />
+          ) : null}
 
           <div className="grid gap-4">
             {secondarySlots.map((slot) => (
-              <SponsorSlotBox key={slot.id} slot={slot} />
+              <SponsorSlotBox
+                key={slot.id}
+                slot={slot}
+                sponsorAgreementAccepted={isSponsorAgreementAccepted}
+              />
             ))}
           </div>
         </div>
@@ -96,8 +160,8 @@ function SponsorsPage() {
             <div>
               <h2 className="text-lg">Video placement</h2>
               <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                Sponsor callouts are included near the start of videos on both
-                channels for the month you sponsor.
+                Sponsor callouts are included near the start of webdevcody
+                videos for the month you sponsor.
               </p>
             </div>
           </div>
@@ -147,9 +211,11 @@ function SponsorsPage() {
 
 function SponsorSlotBox({
   slot,
+  sponsorAgreementAccepted,
   featured = false,
 }: {
   slot: SponsorPublicSlot;
+  sponsorAgreementAccepted: boolean;
   featured?: boolean;
 }) {
   const isAvailable = slot.availability === "available";
@@ -193,7 +259,7 @@ function SponsorSlotBox({
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
             {slot.sponsor
-              ? "Active monthly sponsor across Agentic Jumpstart and webdevcody."
+              ? "Active monthly sponsor on webdevcody."
               : slot.description}
           </p>
         </div>
@@ -227,6 +293,7 @@ function SponsorSlotBox({
             <SponsorCheckoutButton
               slotId={slot.id}
               availability={slot.availability}
+              sponsorAgreementAccepted={sponsorAgreementAccepted}
             />
           )}
         </div>

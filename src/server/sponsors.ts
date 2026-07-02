@@ -10,6 +10,7 @@ import {
 import { auth } from "@/lib/auth";
 import {
   ACTIVE_SPONSORSHIP_STATUSES,
+  SPONSOR_NAME_PLACEHOLDER,
   SPONSOR_SLOT_DEFINITIONS,
   type SponsorSlotId,
 } from "@/lib/sponsors/slots";
@@ -255,6 +256,8 @@ export async function setSponsorStripeCustomerId(
 export async function createPendingSponsorship(input: {
   slotId: string;
   userId: string;
+  sponsorAgreementVersion: string;
+  sponsorAgreementAcceptedAt: Date;
 }) {
   const slotId = SlotIdSchema.parse(input.slotId);
 
@@ -307,6 +310,8 @@ export async function createPendingSponsorship(input: {
         slotId,
         status: "pending_checkout",
         checkoutExpiresAt,
+        sponsorAgreementVersion: input.sponsorAgreementVersion,
+        sponsorAgreementAcceptedAt: input.sponsorAgreementAcceptedAt,
         updatedAt: now,
       });
 
@@ -535,7 +540,7 @@ async function loadSponsorSlotsWithClaims(): Promise<SponsorPublicSlot[]> {
       sponsor:
         claim && active
           ? {
-              companyName: claim.companyName || "Sponsor onboarding",
+              companyName: claim.companyName || SPONSOR_NAME_PLACEHOLDER,
               companyUrl: claim.companyUrl,
               assetUrl: claim.assetId
                 ? `/api/sponsors/assets/${claim.assetId}`

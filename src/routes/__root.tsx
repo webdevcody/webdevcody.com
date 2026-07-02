@@ -4,6 +4,7 @@ import {
   Scripts,
   Link,
   createRootRouteWithContext,
+  useRouterState,
 } from "@tanstack/react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
@@ -100,22 +101,41 @@ function RootComponent() {
 }
 
 function RootDocument({ children }: { children: ReactNode }) {
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  });
+  // OBS browser-source overlays render without site chrome on a transparent
+  // body so they can sit on top of stream scenes.
+  const isObsOverlay = pathname === "/obs" || pathname.startsWith("/obs/");
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
-      <body className="min-h-screen bg-background font-sans antialiased">
-        <ThemeProvider>
+      <body
+        className={`min-h-screen font-sans antialiased ${
+          isObsOverlay ? "bg-transparent" : "bg-background"
+        }`}
+      >
+        {isObsOverlay ? (
           <QueryClientProvider client={queryClient}>
-            <div className="flex min-h-screen flex-col">
-              <Header />
-              <main className="flex-1 bg-background">{children}</main>
-              <Footer />
-            </div>
+            {children}
           </QueryClientProvider>
-        </ThemeProvider>
-        <Toaster />
+        ) : (
+          <>
+            <ThemeProvider>
+              <QueryClientProvider client={queryClient}>
+                <div className="flex min-h-screen flex-col">
+                  <Header />
+                  <main className="flex-1 bg-background">{children}</main>
+                  <Footer />
+                </div>
+              </QueryClientProvider>
+            </ThemeProvider>
+            <Toaster />
+          </>
+        )}
         <Scripts />
       </body>
     </html>

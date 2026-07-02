@@ -40,19 +40,7 @@ Prefer an incremental migration: ship the mostly static marketing pages first, t
 
 ## Phase 2: Migrate Static Routes
 
-Create Astro pages for the lowest-risk routes first:
-
-- `/` from `src/routes/index.tsx`
-- `/about`
-- `/contact`
-- `/privacy-policy`
-- `/terms-of-service`
-- `/fulfillment-policy`
-- `/bye`
-- `/courses`
-- `/courses/[slug]`
-- `/products`
-- `/products/[slug]`
+Create Astro pages for the lowest-risk routes first: the homepage, the static marketing and legal pages (`/about`, `/contact`, `/privacy-policy`, `/terms-of-service`, `/fulfillment-policy`, `/bye`), and the courses/products index and `[slug]` detail pages.
 
 Use existing React components as islands where needed:
 
@@ -88,24 +76,6 @@ Server data options:
 - Prefer Astro SSR pages for account/dashboard data that depends on cookies/session.
 - Keep public sponsor slot data server-rendered where possible.
 - Use API endpoints only where the UI needs client-side mutations or uploads.
-
-## Phase 5: Migrate API Routes
-
-Map TanStack Start server routes to Astro endpoints:
-
-- `src/routes/api/auth/$.ts` -> `src/pages/api/auth/[...all].ts`
-- `src/routes/api/stripe/webhook.ts` -> `src/pages/api/stripe/webhook.ts`
-- `src/routes/api/sponsors/checkout.ts` -> `src/pages/api/sponsors/checkout.ts`
-- `src/routes/api/sponsors/portal.ts` -> `src/pages/api/sponsors/portal.ts`
-- `src/routes/api/sponsors/assets.ts` -> `src/pages/api/sponsors/assets.ts`
-- `src/routes/api/sponsors/assets/$assetId.ts` -> `src/pages/api/sponsors/assets/[assetId].ts`
-
-Important checks:
-
-- Preserve raw request body handling for Stripe webhook signature verification.
-- Preserve auth cookies/session headers for Better Auth.
-- Verify multipart or binary handling for sponsor asset uploads/downloads.
-- Keep Stripe event idempotency behavior unchanged.
 
 ## Phase 6: Remove TanStack Start
 

@@ -3,31 +3,41 @@
 import { useState } from "react";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import { SPONSOR_AGREEMENT_VERSION } from "@/lib/sponsors/agreement";
 import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
 
 type SponsorCheckoutButtonProps = {
   slotId: string;
   availability: "available" | "reserved" | "sponsored";
+  sponsorAgreementAccepted: boolean;
   className?: string;
 };
 
 export function SponsorCheckoutButton({
   slotId,
   availability,
+  sponsorAgreementAccepted,
   className,
 }: SponsorCheckoutButtonProps) {
   const { data: session, isPending: isSessionPending } = authClient.useSession();
   const [isStartingCheckout, setIsStartingCheckout] = useState(false);
   const { toast } = useToast();
 
+  const isAgreementRequired =
+    availability === "available" && Boolean(session) && !sponsorAgreementAccepted;
   const isDisabled =
-    availability !== "available" || isSessionPending || isStartingCheckout;
+    availability !== "available" ||
+    isSessionPending ||
+    isStartingCheckout ||
+    isAgreementRequired;
 
   const label =
     availability === "available"
       ? session
-        ? "Claim slot"
+        ? isAgreementRequired
+          ? "Accept terms to claim"
+          : "Claim slot"
         : "Sign in to claim"
       : availability === "reserved"
         ? "Checkout pending"
@@ -50,7 +60,11 @@ export function SponsorCheckoutButton({
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ slotId }),
+            body: JSON.stringify({
+              slotId,
+              sponsorAgreementAccepted: true,
+              sponsorAgreementVersion: SPONSOR_AGREEMENT_VERSION,
+            }),
           });
 
           const result = (await response.json()) as {

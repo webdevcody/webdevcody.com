@@ -10,7 +10,7 @@ export const Route = createFileRoute("/products/")({
       {
         name: "description",
         content:
-          "SaaS products I've built and continue to maintain. From AI-powered video editing to icon generation and project planning.",
+          "Products and apps I've built and continue to maintain. From AI-powered video editing to developer tools, diagramming, and icon generation.",
       },
     ],
   }),
@@ -23,7 +23,7 @@ function ProductsPage() {
       <SectionHeading
         eyebrow="Products"
         title="Things I've built and shipped"
-        description="A growing catalog of SaaS products I've built over the years. Each one started as an itch I had to scratch — and became a real business."
+        description="A growing catalog of products and apps I've built over the years. Each one started as an itch I had to scratch — and became something real."
       />
       <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
         {products.map((product) => (

@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { env } from "@/env";
+import { SPONSOR_AGREEMENT_VERSION } from "@/lib/sponsors/agreement";
 
 const CheckoutInputSchema = z.object({
   slotId: z.enum([
@@ -10,6 +11,8 @@ const CheckoutInputSchema = z.object({
     "secondary-3",
     "secondary-4",
   ]),
+  sponsorAgreementAccepted: z.literal(true),
+  sponsorAgreementVersion: z.literal(SPONSOR_AGREEMENT_VERSION),
 });
 
 export const Route = createFileRoute("/api/sponsors/checkout")({
@@ -29,12 +32,21 @@ export const Route = createFileRoute("/api/sponsors/checkout")({
         try {
           const user = await requireSponsorSession(request);
           const body = CheckoutInputSchema.parse(await request.json());
+          const sponsorAgreementAcceptedAt = new Date();
+          const sponsorAgreementMetadata = {
+            sponsorAgreementAccepted: "true",
+            sponsorAgreementVersion: body.sponsorAgreementVersion,
+            sponsorAgreementAcceptedAt:
+              sponsorAgreementAcceptedAt.toISOString(),
+          };
 
           await ensureSponsorAccountForUser(user);
           const stripeCustomerId = await getSponsorStripeCustomerId(user.id);
           const pending = await createPendingSponsorship({
             slotId: body.slotId,
             userId: user.id,
+            sponsorAgreementVersion: body.sponsorAgreementVersion,
+            sponsorAgreementAcceptedAt,
           });
 
           try {
@@ -53,12 +65,12 @@ export const Route = createFileRoute("/api/sponsors/checkout")({
                       interval: "month",
                     },
                     product_data: {
-                      name: `${pending.slot.title} - Agentic Jumpstart + webdevcody`,
-                      description:
-                        "Monthly YouTube sponsorship across Agentic Jumpstart and webdevcody.",
+                      name: `${pending.slot.title} - webdevcody`,
+                      description: "Monthly YouTube sponsorship for webdevcody.",
                       metadata: {
                         slotId: pending.slot.id,
                         sponsorshipId: pending.sponsorshipId,
+                        ...sponsorAgreementMetadata,
                       },
                     },
                   },
@@ -69,12 +81,14 @@ export const Route = createFileRoute("/api/sponsors/checkout")({
                 userId: user.id,
                 slotId: pending.slot.id,
                 sponsorshipId: pending.sponsorshipId,
+                ...sponsorAgreementMetadata,
               },
               subscription_data: {
                 metadata: {
                   userId: user.id,
                   slotId: pending.slot.id,
                   sponsorshipId: pending.sponsorshipId,
+                  ...sponsorAgreementMetadata,
                 },
               },
               success_url: `${origin}/sponsors/account?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
@@ -115,7 +129,10 @@ function toErrorResponse(error: unknown) {
   }
 
   if (error instanceof z.ZodError) {
-    return Response.json({ error: "Invalid checkout request." }, { status: 400 });
+    return Response.json(
+      { error: getCheckoutValidationMessage(error) },
+      { status: 400 }
+    );
   }
 
   console.error("Sponsor checkout failed", error);
@@ -123,6 +140,20 @@ function toErrorResponse(error: unknown) {
     { error: "Could not start sponsor checkout." },
     { status: 500 }
   );
+}
+
+function getCheckoutValidationMessage(error: z.ZodError) {
+  const invalidField = error.issues.find((issue) => issue.path[0]);
+
+  if (invalidField?.path[0] === "sponsorAgreementAccepted") {
+    return "Accept the sponsor placement terms before checkout.";
+  }
+
+  if (invalidField?.path[0] === "sponsorAgreementVersion") {
+    return "Refresh the page and accept the latest sponsor placement terms.";
+  }
+
+  return "Invalid checkout request.";
 }
 
 function isSponsorRequestError(

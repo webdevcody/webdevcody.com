@@ -17,7 +17,7 @@ export const profile = {
   stats: [
     { label: "Years shipping software", value: "10+" },
     { label: "YouTube subscribers", value: "200k+" },
-    { label: "SaaS products live", value: "3" },
+    { label: "Products and apps live", value: "5" },
   ],
   featuredVideoId: "-lNpF0ACe1Y",
 } as const;

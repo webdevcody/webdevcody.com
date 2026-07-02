@@ -58,6 +58,8 @@ export const SPONSOR_SLOT_DEFINITIONS = [
   },
 ] as const;
 
+export const SPONSOR_NAME_PLACEHOLDER = "Sponsor onboarding";
+
 export const ACTIVE_SPONSORSHIP_STATUSES = ["active", "trialing"] as const;
 
 export const BLOCKING_SPONSORSHIP_STATUSES = [

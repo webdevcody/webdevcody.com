@@ -154,11 +154,12 @@ export function SponsorAccountPanel({ dashboard }: SponsorAccountPanelProps) {
 
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             <label className="grid gap-2 text-sm font-medium text-foreground">
-              Company name
+              Company or product name
               <input
                 name="companyName"
                 type="text"
                 required
+                placeholder="Shown as “Sponsored by: …” on streams and videos"
                 defaultValue={dashboard.account?.companyName ?? ""}
                 className="rounded-md border border-border bg-background px-3 py-2 text-sm outline-none ring-offset-background placeholder:text-muted-foreground/70 focus-visible:border-accent/60 focus-visible:ring-2 focus-visible:ring-accent/30"
               />

@@ -12,7 +12,7 @@ export default function FeaturedProducts() {
           <SectionHeading
             eyebrow="What I'm building"
             title="Products I ship"
-            description="Real SaaS products I've built and continue to maintain. Each one solves a problem I've had myself."
+            description="Real products and apps I've built and continue to maintain. Each one solves a problem I've had myself."
           />
           <Link
             href="/products"

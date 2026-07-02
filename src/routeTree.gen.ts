@@ -22,6 +22,8 @@ import { Route as CoursesIndexRouteImport } from './routes/courses.index'
 import { Route as SponsorsLoginRouteImport } from './routes/sponsors.login'
 import { Route as SponsorsAccountRouteImport } from './routes/sponsors.account'
 import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
+import { Route as ObsVideoRouteImport } from './routes/obs.video'
+import { Route as ObsLiveRouteImport } from './routes/obs.live'
 import { Route as CoursesSlugRouteImport } from './routes/courses.$slug'
 import { Route as ApiStripeWebhookRouteImport } from './routes/api/stripe/webhook'
 import { Route as ApiSponsorsPortalRouteImport } from './routes/api/sponsors/portal'
@@ -95,6 +97,16 @@ const ProductsSlugRoute = ProductsSlugRouteImport.update({
   path: '/products/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ObsVideoRoute = ObsVideoRouteImport.update({
+  id: '/obs/video',
+  path: '/obs/video',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ObsLiveRoute = ObsLiveRouteImport.update({
+  id: '/obs/live',
+  path: '/obs/live',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CoursesSlugRoute = CoursesSlugRouteImport.update({
   id: '/courses/$slug',
   path: '/courses/$slug',
@@ -142,6 +154,8 @@ export interface FileRoutesByFullPath {
   '/sponsors': typeof SponsorsRouteWithChildren
   '/terms-of-service': typeof TermsOfServiceRoute
   '/courses/$slug': typeof CoursesSlugRoute
+  '/obs/live': typeof ObsLiveRoute
+  '/obs/video': typeof ObsVideoRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/sponsors/account': typeof SponsorsAccountRoute
   '/sponsors/login': typeof SponsorsLoginRoute
@@ -164,6 +178,8 @@ export interface FileRoutesByTo {
   '/sponsors': typeof SponsorsRouteWithChildren
   '/terms-of-service': typeof TermsOfServiceRoute
   '/courses/$slug': typeof CoursesSlugRoute
+  '/obs/live': typeof ObsLiveRoute
+  '/obs/video': typeof ObsVideoRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/sponsors/account': typeof SponsorsAccountRoute
   '/sponsors/login': typeof SponsorsLoginRoute
@@ -187,6 +203,8 @@ export interface FileRoutesById {
   '/sponsors': typeof SponsorsRouteWithChildren
   '/terms-of-service': typeof TermsOfServiceRoute
   '/courses/$slug': typeof CoursesSlugRoute
+  '/obs/live': typeof ObsLiveRoute
+  '/obs/video': typeof ObsVideoRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/sponsors/account': typeof SponsorsAccountRoute
   '/sponsors/login': typeof SponsorsLoginRoute
@@ -211,6 +229,8 @@ export interface FileRouteTypes {
     | '/sponsors'
     | '/terms-of-service'
     | '/courses/$slug'
+    | '/obs/live'
+    | '/obs/video'
     | '/products/$slug'
     | '/sponsors/account'
     | '/sponsors/login'
@@ -233,6 +253,8 @@ export interface FileRouteTypes {
     | '/sponsors'
     | '/terms-of-service'
     | '/courses/$slug'
+    | '/obs/live'
+    | '/obs/video'
     | '/products/$slug'
     | '/sponsors/account'
     | '/sponsors/login'
@@ -255,6 +277,8 @@ export interface FileRouteTypes {
     | '/sponsors'
     | '/terms-of-service'
     | '/courses/$slug'
+    | '/obs/live'
+    | '/obs/video'
     | '/products/$slug'
     | '/sponsors/account'
     | '/sponsors/login'
@@ -278,6 +302,8 @@ export interface RootRouteChildren {
   SponsorsRoute: typeof SponsorsRouteWithChildren
   TermsOfServiceRoute: typeof TermsOfServiceRoute
   CoursesSlugRoute: typeof CoursesSlugRoute
+  ObsLiveRoute: typeof ObsLiveRoute
+  ObsVideoRoute: typeof ObsVideoRoute
   ProductsSlugRoute: typeof ProductsSlugRoute
   CoursesIndexRoute: typeof CoursesIndexRoute
   ProductsIndexRoute: typeof ProductsIndexRoute
@@ -381,6 +407,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/obs/video': {
+      id: '/obs/video'
+      path: '/obs/video'
+      fullPath: '/obs/video'
+      preLoaderRoute: typeof ObsVideoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/obs/live': {
+      id: '/obs/live'
+      path: '/obs/live'
+      fullPath: '/obs/live'
+      preLoaderRoute: typeof ObsLiveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/courses/$slug': {
       id: '/courses/$slug'
       path: '/courses/$slug'
@@ -468,6 +508,8 @@ const rootRouteChildren: RootRouteChildren = {
   SponsorsRoute: SponsorsRouteWithChildren,
   TermsOfServiceRoute: TermsOfServiceRoute,
   CoursesSlugRoute: CoursesSlugRoute,
+  ObsLiveRoute: ObsLiveRoute,
+  ObsVideoRoute: ObsVideoRoute,
   ProductsSlugRoute: ProductsSlugRoute,
   CoursesIndexRoute: CoursesIndexRoute,
   ProductsIndexRoute: ProductsIndexRoute,
