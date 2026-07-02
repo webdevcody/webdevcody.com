@@ -22,7 +22,9 @@ RUN VITE_RECAPTCHA_SITE_KEY="$PUBLIC_RECAPTCHA_SITE_KEY" \
 FROM base AS runner
 
 ENV NODE_ENV=production
-ENV HOST=0.0.0.0
+# Bind dual-stack (IPv4 + IPv6). Railway's edge proxy and private networking
+# connect over IPv6; binding 0.0.0.0 alone causes 502s there.
+ENV HOST=::
 ENV HOME=/tmp
 ENV NPM_CONFIG_CACHE=/tmp/.npm
 
