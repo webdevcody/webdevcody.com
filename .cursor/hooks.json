@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeSubmitPrompt": [
+      {
+        "command": "if [ -z \"$MC_TASK_ID\" ] || [ -z \"$MC_API_URL\" ]; then printf '{\"continue\":true}\\n'; exit 0; fi; cat | curl -sS -m 3 -X POST -H \"Authorization: Bearer $MC_API_TOKEN\" -H \"X-Mission-Control-Runtime: electron-local\" -H \"Content-Type: application/json\" --data-binary @- \"$MC_API_URL/api/hooks/cursor?taskId=$MC_TASK_ID&hookEvent=beforeSubmitPrompt\" >/dev/null 2>&1 || true; printf '{\"continue\":true}\\n'",
+        "_mcManaged": true
+      }
+    ],
+    "sessionStart": [
+      {
+        "command": "if [ -z \"$MC_TASK_ID\" ] || [ -z \"$MC_API_URL\" ]; then printf '{\"continue\":true}\\n'; exit 0; fi; cat | curl -sS -m 3 -X POST -H \"Authorization: Bearer $MC_API_TOKEN\" -H \"X-Mission-Control-Runtime: electron-local\" -H \"Content-Type: application/json\" --data-binary @- \"$MC_API_URL/api/hooks/cursor?taskId=$MC_TASK_ID&hookEvent=sessionStart\" >/dev/null 2>&1 || true; printf '{\"continue\":true}\\n'",
+        "_mcManaged": true
+      }
+    ],
+    "stop": [
+      {
+        "command": "if [ -z \"$MC_TASK_ID\" ] || [ -z \"$MC_API_URL\" ]; then printf '{\"continue\":true}\\n'; exit 0; fi; cat | curl -sS -m 3 -X POST -H \"Authorization: Bearer $MC_API_TOKEN\" -H \"X-Mission-Control-Runtime: electron-local\" -H \"Content-Type: application/json\" --data-binary @- \"$MC_API_URL/api/hooks/cursor?taskId=$MC_TASK_ID&hookEvent=stop\" >/dev/null 2>&1 || true; printf '{\"continue\":true}\\n'",
+        "_mcManaged": true
+      }
+    ],
+    "afterAgentResponse": [
+      {
+        "command": "if [ -z \"$MC_TASK_ID\" ] || [ -z \"$MC_API_URL\" ]; then printf '{\"continue\":true}\\n'; exit 0; fi; cat | curl -sS -m 3 -X POST -H \"Authorization: Bearer $MC_API_TOKEN\" -H \"X-Mission-Control-Runtime: electron-local\" -H \"Content-Type: application/json\" --data-binary @- \"$MC_API_URL/api/hooks/cursor?taskId=$MC_TASK_ID&hookEvent=afterAgentResponse\" >/dev/null 2>&1 || true; printf '{\"continue\":true}\\n'",
+        "_mcManaged": true
+      }
+    ]
+  }
+}

@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
+import { Route as SponsorsRouteImport } from './routes/sponsors'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as FulfillmentPolicyRouteImport } from './routes/fulfillment-policy'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -18,12 +19,25 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as CoursesIndexRouteImport } from './routes/courses.index'
+import { Route as SponsorsLoginRouteImport } from './routes/sponsors.login'
+import { Route as SponsorsAccountRouteImport } from './routes/sponsors.account'
 import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
 import { Route as CoursesSlugRouteImport } from './routes/courses.$slug'
+import { Route as ApiStripeWebhookRouteImport } from './routes/api/stripe/webhook'
+import { Route as ApiSponsorsPortalRouteImport } from './routes/api/sponsors/portal'
+import { Route as ApiSponsorsCheckoutRouteImport } from './routes/api/sponsors/checkout'
+import { Route as ApiSponsorsAssetsRouteImport } from './routes/api/sponsors/assets'
+import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as ApiSponsorsAssetsAssetIdRouteImport } from './routes/api/sponsors/assets/$assetId'
 
 const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
   id: '/terms-of-service',
   path: '/terms-of-service',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SponsorsRoute = SponsorsRouteImport.update({
+  id: '/sponsors',
+  path: '/sponsors',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
@@ -66,6 +80,16 @@ const CoursesIndexRoute = CoursesIndexRouteImport.update({
   path: '/courses/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SponsorsLoginRoute = SponsorsLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => SponsorsRoute,
+} as any)
+const SponsorsAccountRoute = SponsorsAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => SponsorsRoute,
+} as any)
 const ProductsSlugRoute = ProductsSlugRouteImport.update({
   id: '/products/$slug',
   path: '/products/$slug',
@@ -76,6 +100,37 @@ const CoursesSlugRoute = CoursesSlugRouteImport.update({
   path: '/courses/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiStripeWebhookRoute = ApiStripeWebhookRouteImport.update({
+  id: '/api/stripe/webhook',
+  path: '/api/stripe/webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSponsorsPortalRoute = ApiSponsorsPortalRouteImport.update({
+  id: '/api/sponsors/portal',
+  path: '/api/sponsors/portal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSponsorsCheckoutRoute = ApiSponsorsCheckoutRouteImport.update({
+  id: '/api/sponsors/checkout',
+  path: '/api/sponsors/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSponsorsAssetsRoute = ApiSponsorsAssetsRouteImport.update({
+  id: '/api/sponsors/assets',
+  path: '/api/sponsors/assets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
+  id: '/api/auth/$',
+  path: '/api/auth/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSponsorsAssetsAssetIdRoute =
+  ApiSponsorsAssetsAssetIdRouteImport.update({
+    id: '/$assetId',
+    path: '/$assetId',
+    getParentRoute: () => ApiSponsorsAssetsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -84,11 +139,20 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/fulfillment-policy': typeof FulfillmentPolicyRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/sponsors': typeof SponsorsRouteWithChildren
   '/terms-of-service': typeof TermsOfServiceRoute
   '/courses/$slug': typeof CoursesSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
+  '/sponsors/account': typeof SponsorsAccountRoute
+  '/sponsors/login': typeof SponsorsLoginRoute
   '/courses/': typeof CoursesIndexRoute
   '/products/': typeof ProductsIndexRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/sponsors/assets': typeof ApiSponsorsAssetsRouteWithChildren
+  '/api/sponsors/checkout': typeof ApiSponsorsCheckoutRoute
+  '/api/sponsors/portal': typeof ApiSponsorsPortalRoute
+  '/api/stripe/webhook': typeof ApiStripeWebhookRoute
+  '/api/sponsors/assets/$assetId': typeof ApiSponsorsAssetsAssetIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -97,11 +161,20 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/fulfillment-policy': typeof FulfillmentPolicyRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/sponsors': typeof SponsorsRouteWithChildren
   '/terms-of-service': typeof TermsOfServiceRoute
   '/courses/$slug': typeof CoursesSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
+  '/sponsors/account': typeof SponsorsAccountRoute
+  '/sponsors/login': typeof SponsorsLoginRoute
   '/courses': typeof CoursesIndexRoute
   '/products': typeof ProductsIndexRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/sponsors/assets': typeof ApiSponsorsAssetsRouteWithChildren
+  '/api/sponsors/checkout': typeof ApiSponsorsCheckoutRoute
+  '/api/sponsors/portal': typeof ApiSponsorsPortalRoute
+  '/api/stripe/webhook': typeof ApiStripeWebhookRoute
+  '/api/sponsors/assets/$assetId': typeof ApiSponsorsAssetsAssetIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -111,11 +184,20 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/fulfillment-policy': typeof FulfillmentPolicyRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/sponsors': typeof SponsorsRouteWithChildren
   '/terms-of-service': typeof TermsOfServiceRoute
   '/courses/$slug': typeof CoursesSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
+  '/sponsors/account': typeof SponsorsAccountRoute
+  '/sponsors/login': typeof SponsorsLoginRoute
   '/courses/': typeof CoursesIndexRoute
   '/products/': typeof ProductsIndexRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/sponsors/assets': typeof ApiSponsorsAssetsRouteWithChildren
+  '/api/sponsors/checkout': typeof ApiSponsorsCheckoutRoute
+  '/api/sponsors/portal': typeof ApiSponsorsPortalRoute
+  '/api/stripe/webhook': typeof ApiStripeWebhookRoute
+  '/api/sponsors/assets/$assetId': typeof ApiSponsorsAssetsAssetIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -126,11 +208,20 @@ export interface FileRouteTypes {
     | '/contact'
     | '/fulfillment-policy'
     | '/privacy-policy'
+    | '/sponsors'
     | '/terms-of-service'
     | '/courses/$slug'
     | '/products/$slug'
+    | '/sponsors/account'
+    | '/sponsors/login'
     | '/courses/'
     | '/products/'
+    | '/api/auth/$'
+    | '/api/sponsors/assets'
+    | '/api/sponsors/checkout'
+    | '/api/sponsors/portal'
+    | '/api/stripe/webhook'
+    | '/api/sponsors/assets/$assetId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -139,11 +230,20 @@ export interface FileRouteTypes {
     | '/contact'
     | '/fulfillment-policy'
     | '/privacy-policy'
+    | '/sponsors'
     | '/terms-of-service'
     | '/courses/$slug'
     | '/products/$slug'
+    | '/sponsors/account'
+    | '/sponsors/login'
     | '/courses'
     | '/products'
+    | '/api/auth/$'
+    | '/api/sponsors/assets'
+    | '/api/sponsors/checkout'
+    | '/api/sponsors/portal'
+    | '/api/stripe/webhook'
+    | '/api/sponsors/assets/$assetId'
   id:
     | '__root__'
     | '/'
@@ -152,11 +252,20 @@ export interface FileRouteTypes {
     | '/contact'
     | '/fulfillment-policy'
     | '/privacy-policy'
+    | '/sponsors'
     | '/terms-of-service'
     | '/courses/$slug'
     | '/products/$slug'
+    | '/sponsors/account'
+    | '/sponsors/login'
     | '/courses/'
     | '/products/'
+    | '/api/auth/$'
+    | '/api/sponsors/assets'
+    | '/api/sponsors/checkout'
+    | '/api/sponsors/portal'
+    | '/api/stripe/webhook'
+    | '/api/sponsors/assets/$assetId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -166,11 +275,17 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FulfillmentPolicyRoute: typeof FulfillmentPolicyRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  SponsorsRoute: typeof SponsorsRouteWithChildren
   TermsOfServiceRoute: typeof TermsOfServiceRoute
   CoursesSlugRoute: typeof CoursesSlugRoute
   ProductsSlugRoute: typeof ProductsSlugRoute
   CoursesIndexRoute: typeof CoursesIndexRoute
   ProductsIndexRoute: typeof ProductsIndexRoute
+  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  ApiSponsorsAssetsRoute: typeof ApiSponsorsAssetsRouteWithChildren
+  ApiSponsorsCheckoutRoute: typeof ApiSponsorsCheckoutRoute
+  ApiSponsorsPortalRoute: typeof ApiSponsorsPortalRoute
+  ApiStripeWebhookRoute: typeof ApiStripeWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -180,6 +295,13 @@ declare module '@tanstack/react-router' {
       path: '/terms-of-service'
       fullPath: '/terms-of-service'
       preLoaderRoute: typeof TermsOfServiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sponsors': {
+      id: '/sponsors'
+      path: '/sponsors'
+      fullPath: '/sponsors'
+      preLoaderRoute: typeof SponsorsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy-policy': {
@@ -238,6 +360,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoursesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sponsors/login': {
+      id: '/sponsors/login'
+      path: '/login'
+      fullPath: '/sponsors/login'
+      preLoaderRoute: typeof SponsorsLoginRouteImport
+      parentRoute: typeof SponsorsRoute
+    }
+    '/sponsors/account': {
+      id: '/sponsors/account'
+      path: '/account'
+      fullPath: '/sponsors/account'
+      preLoaderRoute: typeof SponsorsAccountRouteImport
+      parentRoute: typeof SponsorsRoute
+    }
     '/products/$slug': {
       id: '/products/$slug'
       path: '/products/$slug'
@@ -252,8 +388,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoursesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/stripe/webhook': {
+      id: '/api/stripe/webhook'
+      path: '/api/stripe/webhook'
+      fullPath: '/api/stripe/webhook'
+      preLoaderRoute: typeof ApiStripeWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/sponsors/portal': {
+      id: '/api/sponsors/portal'
+      path: '/api/sponsors/portal'
+      fullPath: '/api/sponsors/portal'
+      preLoaderRoute: typeof ApiSponsorsPortalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/sponsors/checkout': {
+      id: '/api/sponsors/checkout'
+      path: '/api/sponsors/checkout'
+      fullPath: '/api/sponsors/checkout'
+      preLoaderRoute: typeof ApiSponsorsCheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/sponsors/assets': {
+      id: '/api/sponsors/assets'
+      path: '/api/sponsors/assets'
+      fullPath: '/api/sponsors/assets'
+      preLoaderRoute: typeof ApiSponsorsAssetsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/$': {
+      id: '/api/auth/$'
+      path: '/api/auth/$'
+      fullPath: '/api/auth/$'
+      preLoaderRoute: typeof ApiAuthSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/sponsors/assets/$assetId': {
+      id: '/api/sponsors/assets/$assetId'
+      path: '/$assetId'
+      fullPath: '/api/sponsors/assets/$assetId'
+      preLoaderRoute: typeof ApiSponsorsAssetsAssetIdRouteImport
+      parentRoute: typeof ApiSponsorsAssetsRoute
+    }
   }
 }
+
+interface SponsorsRouteChildren {
+  SponsorsAccountRoute: typeof SponsorsAccountRoute
+  SponsorsLoginRoute: typeof SponsorsLoginRoute
+}
+
+const SponsorsRouteChildren: SponsorsRouteChildren = {
+  SponsorsAccountRoute: SponsorsAccountRoute,
+  SponsorsLoginRoute: SponsorsLoginRoute,
+}
+
+const SponsorsRouteWithChildren = SponsorsRoute._addFileChildren(
+  SponsorsRouteChildren,
+)
+
+interface ApiSponsorsAssetsRouteChildren {
+  ApiSponsorsAssetsAssetIdRoute: typeof ApiSponsorsAssetsAssetIdRoute
+}
+
+const ApiSponsorsAssetsRouteChildren: ApiSponsorsAssetsRouteChildren = {
+  ApiSponsorsAssetsAssetIdRoute: ApiSponsorsAssetsAssetIdRoute,
+}
+
+const ApiSponsorsAssetsRouteWithChildren =
+  ApiSponsorsAssetsRoute._addFileChildren(ApiSponsorsAssetsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -262,11 +465,17 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FulfillmentPolicyRoute: FulfillmentPolicyRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
+  SponsorsRoute: SponsorsRouteWithChildren,
   TermsOfServiceRoute: TermsOfServiceRoute,
   CoursesSlugRoute: CoursesSlugRoute,
   ProductsSlugRoute: ProductsSlugRoute,
   CoursesIndexRoute: CoursesIndexRoute,
   ProductsIndexRoute: ProductsIndexRoute,
+  ApiAuthSplatRoute: ApiAuthSplatRoute,
+  ApiSponsorsAssetsRoute: ApiSponsorsAssetsRouteWithChildren,
+  ApiSponsorsCheckoutRoute: ApiSponsorsCheckoutRoute,
+  ApiSponsorsPortalRoute: ApiSponsorsPortalRoute,
+  ApiStripeWebhookRoute: ApiStripeWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

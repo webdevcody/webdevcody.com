@@ -16,8 +16,8 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["vinxi/types/client"]
+    "types": ["vite/client"]
   },
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", ".vinxi", ".output"]
+  "exclude": ["node_modules", ".vinxi", ".output", "export"]
 }

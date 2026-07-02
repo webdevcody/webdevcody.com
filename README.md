@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# webdevcody.com
 
-## Getting Started
+TanStack Start site for webdevcody.com.
 
-First, run the development server:
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Database
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Sponsor slots, Better Auth accounts, Stripe subscription state, and sponsor
+images are stored in Postgres.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+docker compose up -d postgres
+npm run db:migrate
+```
 
-## Learn More
+Required:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+DATABASE_URL=postgres://webdevcody:webdevcody@localhost:5433/webdevcody
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Sponsor Billing Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Required for the sponsorship flow:
 
-## Deploy on Vercel
+```bash
+APP_URL=http://localhost:3000
+BETTER_AUTH_URL=http://localhost:3000
+BETTER_AUTH_SECRET=replace-with-at-least-32-characters
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+GITHUB_CLIENT_ID=...
+GITHUB_CLIENT_SECRET=...
+GOOGLE_CLIENT_ID=...
+GOOGLE_CLIENT_SECRET=...
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+```
+
+Stripe webhook endpoint:
+
+```text
+https://your-domain.com/api/stripe/webhook
+```
+
+Subscribe the webhook to:
+
+- `checkout.session.completed`
+- `checkout.session.expired`
+- `customer.subscription.created`
+- `customer.subscription.updated`
+- `customer.subscription.deleted`
+- `invoice.paid`
+- `invoice.payment_failed`
+
+Sponsors must sign in before checkout. Active subscriptions claim one of the
+five fixed sponsor slots; canceled, failed, unpaid, past-due, or expired states
+release the slot.

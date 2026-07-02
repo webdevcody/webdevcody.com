@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "@/components/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Menu, ChevronDown } from "lucide-react";
@@ -18,6 +18,7 @@ type NavGroup = {
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   const navigation: NavGroup[] = [
     { name: "Home", href: "/" },
@@ -38,6 +39,7 @@ export default function MobileMenu() {
         href: `/courses/${course.slug}`,
       })),
     },
+    { name: "Sponsors", href: "/sponsors" },
     { name: "Contact", href: "/contact" },
     {
       name: "Submit Video Suggestion",
@@ -50,9 +52,30 @@ export default function MobileMenu() {
     setExpanded(null);
   };
 
+  const closeWithFocusReturn = () => {
+    close();
+    requestAnimationFrame(() => triggerRef.current?.focus());
+  };
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeWithFocusReturn();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
+
   return (
     <div className="block lg:hidden">
       <Button
+        ref={triggerRef}
         variant="ghost"
         size="sm"
         onClick={() => setIsOpen(!isOpen)}
@@ -93,7 +116,7 @@ export default function MobileMenu() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
-              onClick={close}
+              onClick={closeWithFocusReturn}
             />
 
             <motion.div

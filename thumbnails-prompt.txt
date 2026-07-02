@@ -1,0 +1,52 @@
+Create a professional YouTube thumbnail using the attached image of me and the provided topic or creative brief.
+
+STYLE:
+
+* Modern YouTube educational/tech thumbnail.
+* Inspired by clean creator thumbnails, not flashy MrBeast-style thumbnails.
+* Minimal elements.
+* High contrast.
+* Dark background.
+* No excessive effects, no explosions, no random graphics, no unnecessary visual clutter.
+
+SELFIE PLACEMENT:
+
+* Place my face on the left side of the thumbnail.
+* Use my actual face from the uploaded image. Do not alter my facial features.
+* Remove the original background and replace it with a dark background.
+* Do NOT place a glow or outline around me.
+
+THEME / DESIGN:
+
+* Use a clean modern tech/SaaS visual style.
+* Use dark green gradient accents to create depth and focus.
+* Keep supporting visuals abstract, minimal, and easy to understand at a glance.
+* Use simple geometric shapes, soft gradients, and clean spacing.
+* Avoid literal clutter, busy backgrounds, and overly detailed visual explanations.
+* The design should communicate the topic through mood, hierarchy, and composition instead of excessive detail.
+
+TEXT:
+
+* Include at most 1–2 words of text on the thumbnail.
+* Anything beyond 1–2 words clutters the thumbnail — keep it extremely short.
+* Use the shortest possible wording that still communicates the topic.
+* Position text where it is readable but does not compete with the selfie or main design area.
+* Large, high-contrast, mobile-readable type.
+* Do not add subtitles, sentences, labels, or extra words.
+
+COMPOSITION:
+
+* Face occupies roughly 35-40% of thumbnail width.
+* Main design area occupies roughly 60-65%.
+* Plenty of empty space.
+* Avoid crowding elements together.
+* The viewer's eye should naturally move from the selfie toward the main design area.
+
+IMPORTANT:
+
+* Prioritize clarity over style.
+* Prioritize clickability over realism.
+* Thumbnail should still be understandable when viewed at very small mobile sizes.
+* Do not add logos, UI screenshots, charts, code, or decorative elements unless explicitly provided.
+* Final result should feel clean, professional, modern, and educational.
+

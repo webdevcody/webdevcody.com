@@ -1,7 +1,6 @@
 import { GithubIcon, YoutubeIcon } from "@/components/icons";
 import Image from "@/components/image";
 import Link from "@/components/link";
-import { profile } from "@/data/profile";
 import { products } from "@/data/products";
 import { courses } from "@/data/courses";
 import { ModeToggle } from "@/components/site/mode-toggle";
@@ -36,9 +35,7 @@ export default function Header() {
               alt="Web Dev Cody logo"
             />
           </div>
-          <span className="font-semibold text-foreground">
-            {profile.siteTitle}
-          </span>
+          <span className="font-semibold text-foreground">yolo</span>
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">
@@ -66,6 +63,12 @@ export default function Header() {
             viewAllHref="/courses"
             viewAllLabel="View all courses"
           />
+          <Link
+            href="/sponsors"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Sponsors
+          </Link>
           <Link
             href="/contact"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"

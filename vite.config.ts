@@ -9,9 +9,7 @@ export default defineConfig({
   },
   plugins: [
     tsConfigPaths({ projects: ["./tsconfig.json"] }),
-    tanstackStart({
-      tsr: { srcDirectory: "src" },
-    }),
+    tanstackStart(),
     nitro(),
   ],
 });
