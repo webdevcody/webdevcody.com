@@ -16,7 +16,7 @@ export const profile = {
   },
   stats: [
     { label: "Years shipping software", value: "10+" },
-    { label: "YouTube subscribers", value: "200k+" },
+    { label: "YouTube subscribers", value: "265k+" },
     { label: "Products and apps live", value: "5" },
   ],
   featuredVideoId: "-lNpF0ACe1Y",

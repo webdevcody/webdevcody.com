@@ -82,7 +82,7 @@ function AboutPage() {
           <p>
             I've been building software for over a decade. Along the way I've
             shipped SaaS products, led engineering teams, and grown a YouTube
-            channel of more than 200k developers who follow along as I build in
+            channel of more than 265k developers who follow along as I build in
             public.
           </p>
           <p>

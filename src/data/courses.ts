@@ -56,7 +56,7 @@ export const courses: CourseDetail[] = [
     stats: [
       { label: "Productivity boost", value: "10x" },
       { label: "Instructor experience", value: "12+ yrs" },
-      { label: "YouTube subscribers", value: "260k+" },
+      { label: "YouTube subscribers", value: "265k+" },
     ],
     outcomes: [
       {
