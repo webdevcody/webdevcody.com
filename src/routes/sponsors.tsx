@@ -1,9 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { CheckCircle2, ExternalLink, RadioTower } from "lucide-react";
 import { YoutubeIcon } from "@/components/icons";
 import { SponsorCheckoutButton } from "@/components/sponsors/sponsor-checkout-button";
 import Link from "@/components/link";
+import { features } from "@/config/features";
 import {
   SPONSOR_AGREEMENT_CHECKBOX_LABEL,
   SPONSOR_AGREEMENT_TERMS,
@@ -21,6 +22,11 @@ import { profile } from "@/data/profile";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/sponsors")({
+  beforeLoad: () => {
+    if (!features.sponsors) {
+      throw notFound();
+    }
+  },
   loader: async () => getSponsorsPublicData(),
   head: () => ({
     meta: [

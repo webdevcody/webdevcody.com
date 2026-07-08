@@ -7,6 +7,7 @@ import { X, Menu, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { products } from "@/data/products";
 import { courses } from "@/data/courses";
+import { features } from "@/config/features";
 import { cn } from "@/lib/utils";
 
 type NavGroup = {
@@ -39,7 +40,9 @@ export default function MobileMenu() {
         href: `/courses/${course.slug}`,
       })),
     },
-    { name: "Sponsors", href: "/sponsors" },
+    ...(features.sponsors
+      ? [{ name: "Sponsors", href: "/sponsors" }]
+      : []),
     { name: "Contact", href: "/contact" },
     {
       name: "Submit Video Suggestion",

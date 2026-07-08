@@ -3,6 +3,7 @@ import Image from "@/components/image";
 import Link from "@/components/link";
 import { products } from "@/data/products";
 import { courses } from "@/data/courses";
+import { features } from "@/config/features";
 import { ModeToggle } from "@/components/site/mode-toggle";
 import MobileMenu from "@/components/site/mobile-menu";
 import { NavDropdown, type NavDropdownItem } from "@/components/site/nav-dropdown";
@@ -63,12 +64,14 @@ export default function Header() {
             viewAllHref="/courses"
             viewAllLabel="View all courses"
           />
-          <Link
-            href="/sponsors"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Sponsors
-          </Link>
+          {features.sponsors ? (
+            <Link
+              href="/sponsors"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Sponsors
+            </Link>
+          ) : null}
           <Link
             href="/contact"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
