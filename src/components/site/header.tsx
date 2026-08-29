@@ -36,7 +36,7 @@ export default function Header() {
               alt="Web Dev Cody logo"
             />
           </div>
-          <span className="font-semibold text-foreground">yolo</span>
+          <span className="font-semibold text-foreground">webdevcody yolo</span>
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">
